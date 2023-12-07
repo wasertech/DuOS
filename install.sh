@@ -37,8 +37,8 @@ if [ ! -f $PREFIX/bin/deux.sh ]; then
     tmpdir=$(mktemp -d XXXXXX)
     duodir='${tmpdir}/deux-surfaces'
     git clone https://github.com/wasertech/deux-surfaces.git ${duodir}
-    cp ${duodir}/deux.sh ${PREFIX}/bin/deux.sh && \
-    cp ${duodir}/deux.zsh ${PREFIX}/bin/deux.zsh && \
+    cp -f ${duodir}/deux.sh ${PREFIX}/bin/deux.sh && \
+    cp -f ${duodir}/deux.zsh ${PREFIX}/bin/deux.zsh && \
     rm -rf ${tmpdir} || echo "Couldn't install deux.sh." && exit 1
 fi
 
