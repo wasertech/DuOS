@@ -27,7 +27,7 @@ Maybe, I don't know. I only have a Surface Duo, so I can't test it on other devi
 
 ```bash
 pkg install wget
-wget https://raw.githubusercontent.com/Deux-Surfaces/Deux-Surfaces/main/install.sh
+wget https://raw.githubusercontent.com/wasertech/deux-surfaces/master/install.sh
 bash install.sh
 ```
 
