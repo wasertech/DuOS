@@ -19,12 +19,9 @@ proot-distro install $DUO_DISTRO
 
 # Clone deux.sh from GitHub
 
-if [ ! -d $HOME/.deux ]; then
-    git clone https://github.com/wasertech/deux-surfaces.git /tmp/deux-surfaces
-fi
-
 # Install deux.sh in $PREFIX/bin
 if [ ! -f $PREFIX/bin/deux.sh ]; then
+    git clone https://github.com/wasertech/deux-surfaces.git /tmp/deux-surfaces
     cp /tmp/deux-surfaces/deux.sh $PREFIX/bin/deux.sh
 fi
 
