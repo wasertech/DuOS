@@ -17,15 +17,23 @@ pkg install -y proot proot-distro git which
 echo "Select a Linux distribution to install:"
 proot-distro list
 
-echo -n "Enter the alias of the Linux distribution to install: "
+echo "Enter the alias of the Linux distribution to install..."
+echo "Default: manjaro"
+echo "Just hit enter if Manjaro souds nice."
 
-DUO_DISTRO=$(read)
+read -p '❯  ' DUO_DISTRO
+
+if [ !$DUO_DISTRO ]; then
+    DUO_DISTRO='manjaro'
+fi
+
 proot-distro install $DUO_DISTRO
 
 # Clone deux.sh from GitHub
 
 # Install deux.sh in $PREFIX/bin
 if [ ! -f $PREFIX/bin/deux.sh ]; then
+    mktemp deux-surfaces
     git clone https://github.com/wasertech/deux-surfaces.git /tmp/deux-surfaces
     cp /tmp/deux-surfaces/deux.sh $PREFIX/bin/deux.sh
 fi
