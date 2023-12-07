@@ -23,7 +23,7 @@ echo "Just hit enter if this option sounds appealing."
 
 read -p '❯  ' DUO_DISTRO
 
-if [ -z $DUO_DISTRO ]; then
+if [ ! -z $DUO_DISTRO ]; then
     DUO_DISTRO='manjaro'
 fi
 
