@@ -72,7 +72,7 @@ function duo-user() {
     su $DUO_USER
 }
 
-if [[ "$USER" == 'root' && "$RELEASE" == "Manjaro ARM" ]]; then
+if [[ "$HOME" == 'root' && "$RELEASE" == "Manjaro ARM" ]]; then
     if [ -z "$DUO_USER" ]; then
         init
     fi
