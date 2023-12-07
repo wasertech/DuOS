@@ -34,7 +34,7 @@ proot-distro install $DUO_DISTRO || true
 # Install deux.sh in $PREFIX/bin
 mkdir -p $PREFIX/bin
 tmpdir=$(mktemp -d XXXXXX)
-duodir='${tmpdir}/deux-surfaces'
+duodir=${tmpdir}/deux-surfaces
 git clone https://github.com/wasertech/deux-surfaces.git ${duodir}
 rm -rf ${PREFIX}/bin/deux.sh && \
 rm -rf ${PREFIX}/bin/deux.zsh && \
