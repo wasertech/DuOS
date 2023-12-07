@@ -52,7 +52,6 @@ fi
 
 if grep -q "DEUX_DISTRO" $HOME/.bashrc; then
     echo "DEUX_DISTRO is already set in .bashrc."
-    return 1
 fi
 
 # Set DEUX_DISTRO in .bashrc
@@ -65,7 +64,6 @@ fi
 
 if grep -q "deux.sh" $HOME/.bashrc; then
     echo "deux.sh is already sourced in .bashrc."
-    return 1
 fi
 
 # Source deux.sh in .bashrc
@@ -102,7 +100,7 @@ if [ $DUO_DISTRO == "manjaro" ]; then
     su $DUO_USER
 else
     echo "The Linux distribution $DUO_DISTRO is not supported."
-    return 1
+    exit 1
 fi
 
 echo "Welcome to ${DUO_DISTRO} ${DUO_USER} !"

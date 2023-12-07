@@ -10,7 +10,7 @@ fi
 
 # Set aliases
 alias which='$(command -v)'
-alias login='proot-dist login'
+alias login='proot-distro login'
 alias fetch='fastfetch'
 
 # Clear the terminal
