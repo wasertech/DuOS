@@ -21,7 +21,7 @@ echo "You are $(whoami) on $(hostname)."
 # Make sure the user is in the right directory
 cd $HOME
 
-RELEASE=$(cat /etc/os-release)
+RELEASE=$(cat /etc/os-release || "Unknown Linux distribution")
 
 function init() {
     
