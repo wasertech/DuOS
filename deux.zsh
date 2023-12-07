@@ -8,7 +8,7 @@ function init() {
         git \
         neovim \
         fastfetch \
-        xonsh"
+        zsh"
         pacman -Syyu
         pacman -S $pkglist
 
