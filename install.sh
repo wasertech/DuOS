@@ -50,10 +50,10 @@ if [ ! -f $HOME/.bashrc ]; then
     touch $HOME/.bashrc
 fi
 
-# Make sure DUO root's .bashrc exists.
-if [ ! -f /root/.bashrc ]; then
-    touch /root/.bashrc
-fi
+# # Make sure DUO root's .bashrc exists.
+# if [ ! -f /root/.bashrc ]; then
+#     touch /root/.bashrc
+# fi
 
 # # Check if 'deux.sh' is configured in root's .bashrc
 # if ! grep -q "deux.sh" /root/.bashrc; then
