@@ -32,15 +32,13 @@ proot-distro install $DUO_DISTRO || true
 # Clone deux.sh from GitHub
 
 # Install deux.sh in $PREFIX/bin
-if [ ! -f $PREFIX/bin/deux.sh ]; then
-    mkdir -p $PREFIX/bin
-    tmpdir=$(mktemp -d XXXXXX)
-    duodir='${tmpdir}/deux-surfaces'
-    git clone https://github.com/wasertech/deux-surfaces.git ${duodir}
-    cp -f ${duodir}/deux.sh ${PREFIX}/bin/deux.sh && \
-    cp -f ${duodir}/deux.zsh ${PREFIX}/bin/deux.zsh && \
-    rm -rf ${tmpdir} || echo "Couldn't install deux.sh." && exit 1
-fi
+mkdir -p $PREFIX/bin
+tmpdir=$(mktemp -d XXXXXX)
+duodir='${tmpdir}/deux-surfaces'
+git clone https://github.com/wasertech/deux-surfaces.git ${duodir}
+cp ${duodir}/deux.sh ${PREFIX}/bin/deux.sh && \
+cp ${duodir}/deux.zsh ${PREFIX}/bin/deux.zsh && \
+rm -rf ${tmpdir} || echo "Couldn't install deux." && exit 1
 
 # Make deux.sh executable
 chmod +x $PREFIX/bin/deux.sh
