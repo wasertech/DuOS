@@ -21,11 +21,11 @@ echo "You are $(whoami) on $(hostname)."
 # Make sure the user is in the right directory
 cd $HOME
 
+RELEASE=$(cat /etc/arch-release)
+
 function init() {
     
-    release=$(cat /etc/os-release | grep -oP '(?<=^ID=).+' | tr -d '"')
-    
-    if [ $release == "manjaro" ] || [ $release == "arch" ]; then
+    if [ $RELEASE == "manjaro" ] || [ $RELEASE == "arch" ]; then
             # update system
         $pkglist = "base-devel \
         git \
@@ -61,7 +61,7 @@ function duo() {
     login $DUO_DISTRO
 }
 
-if [ "$USER" == 'root' ] && [[ "$RELEASE" == "manjaro" || "$RELEASE" == "arch" ]]; then
+if [ "$USER" == 'root' ] && [[ "$RELEASE" == "Manjaro Linux" || "$RELEASE" == "Arch Linux" ]]; then
     init
 elif [ "$RELEASE" != "manjaro" ]; then
     # echo "Deux is ready to use."
