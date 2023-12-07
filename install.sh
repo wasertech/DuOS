@@ -14,7 +14,7 @@ pkg install -y proot proot-distro
 
 echo "Select a Linux distribution to install:"
 proot-distro list
-$DUO_DISTRO=$(input "Enter the alias of the Linux distribution to install: ")
+DUO_DISTRO=$(input "Enter the alias of the Linux distribution to install: ")
 proot-distro install $DUO_DISTRO
 
 # Clone deux.sh from GitHub
