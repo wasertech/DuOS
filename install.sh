@@ -74,13 +74,20 @@ if ! grep -q "deux.sh" $HOME/.bashrc; then
     echo "source $PREFIX/bin/deux.sh" >> $HOME/.bashrc
 fi
 
+# Make sure .zshrc exists
+if [ ! -f $HOME/.zshrc ]; then
+    touch $HOME/.zshrc
+fi
+
 if grep -q "deux.zsh" $HOME/.zshrc; then
-    echo "deux.sh is already sourced in .zshrc."
+    echo "deux.zsh is already sourced in .zshrc."
     exit 1
 fi
 
+# Source deux.zsh in .zshrc
+
 if ! grep -q "deux.zsh" $HOME/.zshrc; then
-    echo "source $PREFIX/bin/deux.sh" >> $HOME/.zshrc
+    echo "source $PREFIX/bin/deux.zsh" >> $HOME/.zshrc
 fi
 
 echo "Deux has been installed successfully."
