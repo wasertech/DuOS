@@ -16,7 +16,7 @@ alias fetch='fastfetch'
 # Print user and system information
 uname -a
 
-echo "You are $USER on $HOST."
+echo "You are $USER on ${HOST:-'localhost'}."
 
 # Make sure the user is in the right directory
 cd $HOME
