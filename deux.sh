@@ -2,6 +2,8 @@
 # Deux (Operating Systems): Linux on Android
 # This script is used to run a Linux distribution in a chroot environment on any Android device.
 
+set -e
+
 # Check if pRoot and pRoot-distro are installed
 if ! command -v proot >/dev/null 2>&1 || ! command -v proot-distro >/dev/null 2>&1; then
     echo "pRoot and pRoot-distro are not installed."
@@ -61,8 +63,20 @@ function duo() {
     login $DUO_DISTRO
 }
 
+function duo-user() {
+    if [ -z "$DUO_USER" ]; then
+        echo "No user is set."
+        return 1
+    fi
+
+    su $DUO_USER
+}
+
 if [ "$USER" == 'root' ] && [ "$RELEASE" == "Manjaro ARM" ]; then
-    init
+    if [ -z "$DUO_USER" ]; then
+        init
+    fi
+    duo-user
 elif [ "$RELEASE" != "manjaro" ]; then
     # echo "Deux is ready to use."
     # echo "Type 'duo' to start the chroot environment."
