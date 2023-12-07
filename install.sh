@@ -27,7 +27,7 @@ if [ !$DUO_DISTRO ]; then
     DUO_DISTRO='manjaro'
 fi
 
-proot-distro install $DUO_DISTRO
+proot-distro install $DUO_DISTRO || true
 
 # Clone deux.sh from GitHub
 
