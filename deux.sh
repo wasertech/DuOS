@@ -61,14 +61,12 @@ function duo() {
     login $DUO_DISTRO
 }
 
-if [ $USER == 'root' ] && [[ [ $RELEASE == "manjaro" ] || [ $RELEASE == "arch" ] ]] ; then
+if [ "$USER" == 'root' ] && [[ "$RELEASE" == "manjaro" || "$RELEASE" == "arch" ]]; then
     init
-elif [ $RELEASE != "manjaro" ]; then
+elif [ "$RELEASE" != "manjaro" ]; then
     echo "Deux is ready to use."
-
     echo "Type 'duo' to start the chroot environment."
-
     duo
-elif [ ! -z "$DUO_USER"]
-    su $DUO_USER
+elif [ ! -z "$DUO_USER" ]; then
+    su "$DUO_USER"
 fi
