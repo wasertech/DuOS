@@ -24,12 +24,6 @@ echo -n "You are $(whoami) on $(hostname)."
 # Make sure the user is in the right directory
 cd $HOME
 
-
-if [ -z "$DUO_DISTRO" ]; then
-    echo "The chroot environment does not exist."
-    exit 1
-fi
-
 function duo() {
     echo "Welcome on Duo!"
 
