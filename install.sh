@@ -37,7 +37,9 @@ if [ ! -f $PREFIX/bin/deux.sh ]; then
     tmpdir=$(mktemp -d XXXXXX)
     duodir='${tmpdir}/deux-surfaces'
     git clone https://github.com/wasertech/deux-surfaces.git ${duodir}
-    cp ${duodir}/deux.sh ${PREFIX}/bin/deux.sh && rm -rf ${tmpdir} || echo "Couldn't install deux.sh." && exit 1
+    cp ${duodir}/deux.sh ${PREFIX}/bin/deux.sh && \
+    cp ${duodir}/deux.zsh ${PREFIX}/bin/deux.zsh && \
+    rm -rf ${tmpdir} || echo "Couldn't install deux.sh." && exit 1
 fi
 
 # Make deux.sh executable
@@ -72,35 +74,13 @@ if ! grep -q "deux.sh" $HOME/.bashrc; then
     echo "source $PREFIX/bin/deux.sh" >> $HOME/.bashrc
 fi
 
-proot-distro login $DUO_DISTRO
-
-# update system, create user, install packages, etc.
-# only if $DUO_DISTRO is manjaro
-
-# Install packages
-if [ $DUO_DISTRO == "manjaro" ]; then
-    # we shoud be "root" in manjaro
-
-    # update system
-    $pkglist = "base-devel \
-    git \
-    nvim \
-    neofetch"
-    pacman -Syyu
-    pacman -S $pkglist
-
-    fastfetch
-
-    # create user interactively w/ administrative privileges
-    DUO_USER=$(input "Enter the username of the user to create: ")
-    useradd -m -G wheel -s /bin/bash $DUO_USER
-    passwd $DUO_USER
-
-    # log in as user
-    su $DUO_USER
-else
-    echo "The Linux distribution $DUO_DISTRO is not supported."
+if grep -q "deux.zsh" $HOME/.zshrc; then
+    echo "deux.sh is already sourced in .zshrc."
     exit 1
 fi
 
-echo "Welcome to ${DUO_DISTRO} ${DUO_USER} !"
+if ! grep -q "deux.zsh" $HOME/.zshrc; then
+    echo "source $PREFIX/bin/deux.sh" >> $HOME/.zshrc
+fi
+
+echo "Deux has been installed successfully."
