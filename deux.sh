@@ -25,7 +25,7 @@ echo -n "You are $(whoami) on $(hostname)."
 cd $HOME
 
 # Check if the chroot environment exists
-if [ ! -d $DUO_DISTRO ]; then
+if [ !$DUO_DISTRO ]; then
     echo "The chroot environment does not exist."
     return 1
 fi
