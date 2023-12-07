@@ -17,7 +17,9 @@ alias fetch='fastfetch'
 clear
 
 # Print user and system information
-whoami && uname -a
+uname -a
+
+echo -n "You are $(whoami) on $(hostname)."
 
 # Make sure the user is in the right directory
 cd $HOME

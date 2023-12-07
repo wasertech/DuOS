@@ -52,14 +52,14 @@ fi
 
 # Check if DEUX_DISTRO is set in .bashrc
 
-if grep -q "DEUX_DISTRO" $HOME/.bashrc; then
-    echo "DEUX_DISTRO is already set in .bashrc."
+if grep -q "DUO_DISTRO" $HOME/.bashrc; then
+    echo "DUO_DISTRO is already set in .bashrc."
 fi
 
 # Set DEUX_DISTRO in .bashrc
 
-if ! grep -q "DEUX_DISTRO" $HOME/.bashrc; then
-    echo "export DEUX_DISTRO=$HOME/.deux" >> $HOME/.bashrc
+if ! grep -q "DUO_DISTRO" $HOME/.bashrc; then
+    echo "export DUO_DISTRO='${DUO_DISTRO}'" >> $HOME/.bashrc
 fi
 
 # Check if deux.sh is already sourced in .bashrc
