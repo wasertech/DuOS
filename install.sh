@@ -84,14 +84,14 @@ if ! grep -q "deux.sh" $HOME/.bashrc; then
     echo "source $PREFIX/bin/deux.sh" >> $HOME/.bashrc
 fi
 
-# Make sure .zshrc exists
-if [ ! -f /root/.zshrc ]; then
-    touch /root/.zshrc
-fi
+# # Make sure .zshrc exists
+# if [ ! -f /root/.zshrc ]; then
+#     touch /root/.zshrc
+# fi
 
-if grep -q "deux.zsh" /root/.zshrc; then
-    echo "deux.zsh is already sourced in .zshrc."
-fi
+# if grep -q "deux.zsh" /root/.zshrc; then
+#     echo "deux.zsh is already sourced in .zshrc."
+# fi
 
 # Source deux.zsh in .zshrc
 
