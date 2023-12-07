@@ -23,7 +23,7 @@ echo "You are $USER on $HOST."
 # Make sure the user is in the right directory
 cd $HOME
 
-RELEASE=$(cat /etc/arch-release || No)
+RELEASE=$(cat /etc/arch-release || echo "None" )
 
 function init() {
     
