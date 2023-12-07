@@ -45,18 +45,28 @@ rm -rf ${tmpdir} || echo "Couldn't install deux."
 # Make deux.sh executable
 chmod +x $PREFIX/bin/deux.sh
 
-# Make sure .bashrc exists
+# Make sure Temrmux's default user's .bashrc exists
 if [ ! -f $HOME/.bashrc ]; then
     touch $HOME/.bashrc
 fi
 
-# Check if DEUX_DISTRO is set in .bashrc
+# Make sure DUO root's .bashrc exists.
+if [ ! -f /root/.bashrc ]; then
+    touch /root/.bashrc
+fi
+
+# Check if 'deux.sh' is configured in root's .bashrc
+if ! grep -q "deux.sh" /root/.bashrc; then
+    echo "source $PREFIX/bin/deux.sh" >> /root/.bashrc
+fi
+
+# Check if DUO_DISTRO is set in .bashrc
 
 if grep -q "DUO_DISTRO" $HOME/.bashrc; then
     echo "DUO_DISTRO is already set in .bashrc."
 fi
 
-# Set DEUX_DISTRO in .bashrc
+# Set DUO_DISTRO in .bashrc
 
 if ! grep -q "DUO_DISTRO" $HOME/.bashrc; then
     echo "export DUO_DISTRO='${DUO_DISTRO}'" >> $HOME/.bashrc
