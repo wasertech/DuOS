@@ -10,7 +10,7 @@ fi
 pkg update -y
 
 # Install dependencies
-pkg install -y proot proot-distro
+pkg install -y proot proot-distro git
 
 # Install selected Linux distribution
 
