@@ -29,7 +29,7 @@ if [ ! -d $DUO_DISTRO ]; then
 fi
 
 function duo() {
-    echo "Welcome to Deux!"
+    echo "Welcome on Duo!"
 
     # Login to the chroot environment
     login $DUO_DISTRO
