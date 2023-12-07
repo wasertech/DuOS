@@ -13,9 +13,6 @@ alias which='$(command -v)'
 alias login='proot-distro login'
 alias fetch='fastfetch'
 
-# Clear the terminal
-clear
-
 # Print user and system information
 uname -a
 
@@ -29,19 +26,6 @@ function duo() {
 
     # Login to the chroot environment
     login $DUO_DISTRO
-
-    # Print system information using fastfetch if available
-    if command -v fastfetch >/dev/null 2>&1; then
-        fetch
-    else
-        echo "Couldn't fetch system information."
-    fi
-
-    # log in as user
-    su $DUO_USER
-
-    echo "Welcome to $DUO_DISTRO!"
-    echo "Type 'exit' twice to exit the chroot environment."
 }
 
 echo "Deux is ready to use."

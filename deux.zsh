@@ -1,3 +1,5 @@
+alias fetch="fastfetch"
+
 function init() {
     
     release=$(cat /etc/os-release | grep -oP '(?<=^ID=).+' | tr -d '"')
@@ -33,4 +35,19 @@ function init() {
 
 
 echo "Welcome on Duo!"
+
+# Print system information using fastfetch if available
+if command -v fastfetch >/dev/null 2>&1; then
+    fetch
+else
+    echo "Couldn't fetch system information."S
+fi
+
+if [ -z "$DUO_USER" ]; then
+    init
+fi
+
+echo "Welcome to $DUO_DISTRO!"
+echo "Type 'exit' twice to exit the chroot environment."
+
 su $DUO_USER
