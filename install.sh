@@ -1,3 +1,5 @@
+set -e
+
 # Check Termux version
 if [ ! -f $PREFIX/bin/termux-info ]; then
     echo "Termux is not installed."
