@@ -64,8 +64,9 @@ function duo() {
 if [ "$USER" == 'root' ] && [[ "$RELEASE" == "manjaro" || "$RELEASE" == "arch" ]]; then
     init
 elif [ "$RELEASE" != "manjaro" ]; then
-    echo "Deux is ready to use."
-    echo "Type 'duo' to start the chroot environment."
+    # echo "Deux is ready to use."
+    # echo "Type 'duo' to start the chroot environment."
+    clear
     duo
 elif [ ! -z "$DUO_USER" ]; then
     su "$DUO_USER"
