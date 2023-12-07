@@ -33,8 +33,8 @@ proot-distro install $DUO_DISTRO || true
 
 # Install deux.sh in $PREFIX/bin
 if [ ! -f $PREFIX/bin/deux.sh ]; then
-    mktemp deux-surfaces
-    git clone https://github.com/wasertech/deux-surfaces.git /tmp/deux-surfaces
+    tmpdir=$(mktemp -d deux-surfaces.XXXXXX)
+    git clone https://github.com/wasertech/deux-surfaces.git $tmpdir
     cp /tmp/deux-surfaces/deux.sh $PREFIX/bin/deux.sh
 fi
 

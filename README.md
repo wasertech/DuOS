@@ -22,7 +22,7 @@ Maybe, I don't know. I only have a Surface Duo, so I can't test it on other devi
 
 ### Instructions
 
-1. Install the latest version of [Termux](https://termux.com/) from the Google Play Store.
+1. Install the latest version of [Termux](https://termux.com/).
 2. Open Termux and run the following commands:
 
 ```bash
