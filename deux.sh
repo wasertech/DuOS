@@ -61,7 +61,7 @@ function duo() {
     login $DUO_DISTRO
 }
 
-if [ "$USER" == 'root' ] && [[ "$RELEASE" == "Manjaro Linux" || "$RELEASE" == "Manjaro ARM" || "$RELEASE" == "Arch Linux" || "$RELEASE" == "Arch ARM"]]; then
+if [ "$USER" == 'root' ] && [ "$RELEASE" == "Manjaro ARM" ]; then
     init
 elif [ "$RELEASE" != "manjaro" ]; then
     # echo "Deux is ready to use."
