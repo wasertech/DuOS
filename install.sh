@@ -55,10 +55,10 @@ if [ ! -f /root/.bashrc ]; then
     touch /root/.bashrc
 fi
 
-# Check if 'deux.sh' is configured in root's .bashrc
-if ! grep -q "deux.sh" /root/.bashrc; then
-    echo "source $PREFIX/bin/deux.sh" >> /root/.bashrc
-fi
+# # Check if 'deux.sh' is configured in root's .bashrc
+# if ! grep -q "deux.sh" /root/.bashrc; then
+#     echo "source $PREFIX/bin/deux.sh" >> /root/.bashrc
+# fi
 
 # Check if DUO_DISTRO is set in .bashrc
 
