@@ -81,7 +81,6 @@ fi
 
 if grep -q "deux.zsh" $HOME/.zshrc; then
     echo "deux.zsh is already sourced in .zshrc."
-    exit 1
 fi
 
 # Source deux.zsh in .zshrc
@@ -91,3 +90,4 @@ if ! grep -q "deux.zsh" $HOME/.zshrc; then
 fi
 
 echo "Deux has been installed successfully."
+echo "Type bash or restart Termux to start using it."

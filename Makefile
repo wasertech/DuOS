@@ -4,7 +4,7 @@ PREFIX  ?= usr/local
 install:
 	@echo -n "Installing..."
 	@chmod 755 ./install.sh
-	@bash ./install.sh
+	@bash ./install.sh || true
 	@echo "Done!"
 
 uninstall:
