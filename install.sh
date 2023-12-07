@@ -1,7 +1,7 @@
 set -e
 
 function input {
-    echo -n '$1\n❯ '; read
+    echo -n '${1}\n❯ '; read
 }
 
 # Check Termux version
