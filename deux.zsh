@@ -67,7 +67,7 @@ if [ "$HOME" == '/root' ] && [ "$RELEASE" == "Manjaro ARM" ]; then
     if [ -z "$DUO_USER" ]; then
         init
     fi
-    duo-user
+    duo
 elif [ ! -z "$DUO_USER" ]; then
     su "$DUO_USER"
 fi
