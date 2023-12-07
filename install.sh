@@ -1,5 +1,9 @@
 set -e
 
+function input {
+    echo -n '$1\n❯ '; read
+}
+
 # Check Termux version
 if [ ! -f $PREFIX/bin/termux-info ]; then
     echo "Termux is not installed."
@@ -16,14 +20,7 @@ pkg install -y proot proot-distro git which
 
 echo "Select a Linux distribution to install:"
 proot-distro list
-DUO_DISTRO=$(/usr/bin/whiptail --title "Deux" --menu "Select a Linux distribution to install:" 15 60 4 \
-"alpine" "Alpine Linux" \
-"archlinux" "Arch Linux" \
-"debian" "Debian" \
-"fedora" "Fedora" \
-"gentoo" "Gentoo" \
-"manjaro" "Manjaro" \
-"ubuntu" "Ubuntu" 3>&1 1>&2 2>&3)
+DUO_DISTRO=$(input "Enter the alias of the Linux distribution to install: ")
 proot-distro install $DUO_DISTRO
 
 # Clone deux.sh from GitHub
