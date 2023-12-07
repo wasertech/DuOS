@@ -77,11 +77,11 @@ if [ "$USER" == 'root' ] && [ "$RELEASE" == "Manjaro ARM" ]; then
         init
     fi
     duo-user
-elif [ "$RELEASE" != "manjaro" ]; then
+elif [ "$RELEASE" != "Manjaro ARM" ]; then
     # echo "Deux is ready to use."
     # echo "Type 'duo' to start the chroot environment."
     clear
     duo
-elif [ -z "$DUO_USER" ]; then
+elif [ -z "$DUO_USER" ] && [ "$RELEASE" == "Manjaro ARM" ]; then
     su "$DUO_USER"
 fi

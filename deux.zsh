@@ -1,10 +1,31 @@
-alias fetch="fastfetch"
+#!/bin/bash
+# Deux (Operating Systems): Linux on Android
+# This script is used to run a Linux distribution in a chroot environment on any Android device.
+
+set -e
+
+# Check if pRoot and pRoot-distro are installed
+if ! command -v proot >/dev/null 2>&1 || ! command -v proot-distro >/dev/null 2>&1; then
+    echo "pRoot and pRoot-distro are not installed."
+    exit 1
+fi
+
+# Set aliases
+alias fetch='fastfetch'
+
+# Print user and system information
+uname -a
+
+echo "You are $USER on $HOST."
+
+# Make sure the user is in the right directory
+cd $HOME
+
+RELEASE=$(cat /etc/arch-release || echo "None" )
 
 function init() {
     
-    release=$(cat /etc/os-release | grep -oP '(?<=^ID=).+' | tr -d '"')
-    
-    if [ $release == "manjaro" ] || [ $release == "arch" ]; then
+    if [ $RELEASE == "Manjaro ARM" ] || [ $RELEASE == "arch" ]; then
             # update system
         $pkglist = "base-devel \
         git \
@@ -33,21 +54,20 @@ function init() {
 
 }
 
+function duo() {
+    if [ -z "$DUO_USER" ]; then
+        echo "No user is set."
+        return 1
+    fi
 
-echo "Welcome on Duo!"
+    su $DUO_USER
+}
 
-# Print system information using fastfetch if available
-if command -v fastfetch >/dev/null 2>&1; then
-    fetch
-else
-    echo "Couldn't fetch system information."S
+if [ "$USER" == 'root' ] && [ "$RELEASE" == "Manjaro ARM" ]; then
+    if [ -z "$DUO_USER" ]; then
+        init
+    fi
+    duo-user
+elif [ -z "$DUO_USER" ]; then
+    su "$DUO_USER"
 fi
-
-if [ -z "$DUO_USER" ]; then
-    init
-fi
-
-echo "Welcome to $DUO_DISTRO!"
-echo "Type 'exit' twice to exit the chroot environment."
-
-su $DUO_USER
