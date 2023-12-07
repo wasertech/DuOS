@@ -25,7 +25,7 @@ RELEASE=$(cat /etc/arch-release || echo "None" )
 
 function init() {
     
-    if [ $RELEASE == "Manjaro ARM" ] || [ $RELEASE == "arch" ]; then
+    if [ "$HOME" == '/root' ] && [ "$RELEASE" == "Manjaro ARM" ]]; then
             # update system
         $pkglist = "base-devel \
         git \
@@ -39,7 +39,7 @@ function init() {
 
         # create user interactively w/ administrative privileges
         DUO_USER=$(input "Enter the username of the user to create: ")
-        useradd -m -G wheel -s /bin/bash $DUO_USER
+        useradd -m -G wheel -s /bin/zsh $DUO_USER
         passwd $DUO_USER
 
         echo "export DUO_USER=${DUO_USER}" >> ~/.zshrc
