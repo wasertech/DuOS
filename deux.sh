@@ -18,16 +18,16 @@ alias fetch='fastfetch'
 # Print user and system information
 uname -a
 
-echo "You are $(whoami) on $(hostname)."
+echo "You are $USER on $HOST."
 
 # Make sure the user is in the right directory
 cd $HOME
 
-RELEASE=$(cat /etc/os-release || "Unknown Linux distribution")
+RELEASE=$(cat /etc/arch-release || "None")
 
 function init() {
     
-    if [ $RELEASE == "manjaro" ] || [ $RELEASE == "arch" ]; then
+    if [ $RELEASE == "Manjaro ARM" ] || [ $RELEASE == "arch" ]; then
             # update system
         $pkglist = "base-devel \
         git \
@@ -82,6 +82,6 @@ elif [ "$RELEASE" != "manjaro" ]; then
     # echo "Type 'duo' to start the chroot environment."
     clear
     duo
-elif [ ! -z "$DUO_USER" ]; then
+elif [ -z "$DUO_USER" ]; then
     su "$DUO_USER"
 fi
