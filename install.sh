@@ -40,7 +40,7 @@ rm -rf ${PREFIX}/bin/deux.sh && \
 rm -rf ${PREFIX}/bin/deux.zsh && \
 cp ${duodir}/deux.sh ${PREFIX}/bin/deux.sh && \
 cp ${duodir}/deux.zsh ${PREFIX}/bin/deux.zsh && \
-rm -rf ${tmpdir} || echo "Couldn't install deux." && exit 1
+rm -rf ${tmpdir} || echo "Couldn't install deux."
 
 # Make deux.sh executable
 chmod +x $PREFIX/bin/deux.sh
