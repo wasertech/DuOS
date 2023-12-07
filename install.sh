@@ -65,8 +65,8 @@ proot-distro login $DUO_DISTRO
 # only if $DUO_DISTRO is manjaro
 
 # Install packages
-if [ $DUO_DISTRO = "manjaro" ]; then
-    # we shoud already be "root"
+if [ $DUO_DISTRO == "manjaro" ]; then
+    # we shoud be "root" in manjaro
 
     # update system
     $pkglist = "base-devel \
@@ -85,8 +85,6 @@ if [ $DUO_DISTRO = "manjaro" ]; then
 
     # log in as user
     su $DUO_USER
-fi
-
 else
     echo "The Linux distribution $DUO_DISTRO is not supported."
     return 1
