@@ -24,8 +24,8 @@ echo -n "You are $(whoami) on $(hostname)."
 # Make sure the user is in the right directory
 cd $HOME
 
-# Check if the chroot environment exists
-if [ !$DUO_DISTRO ]; then
+
+if [ -z "$DUO_DISTRO" ]; then
     echo "The chroot environment does not exist."
     return 1
 fi
@@ -51,4 +51,5 @@ function duo() {
 }
 
 echo "Deux is ready to use."
+
 echo "Type 'duo' to start the chroot environment."
