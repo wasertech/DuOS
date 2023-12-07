@@ -63,11 +63,11 @@ function duo() {
     su $DUO_USER
 }
 
-if [ "$USER" == 'root' ] && [ "$RELEASE" == "Manjaro ARM" ]; then
+if [ "$HOME" == '/root' ] && [ "$RELEASE" == "Manjaro ARM" ]; then
     if [ -z "$DUO_USER" ]; then
         init
     fi
     duo-user
-elif [ -z "$DUO_USER" ]; then
+elif [ ! -z "$DUO_USER" ]; then
     su "$DUO_USER"
 fi
