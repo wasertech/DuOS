@@ -85,8 +85,8 @@ fi
 
 # Source deux.zsh in .zshrc
 
-if ! grep -q "deux.zsh" $HOME/.zshrc; then
-    echo "source $PREFIX/bin/deux.zsh" >> $HOME/.zshrc
+if ! grep -q "deux.zsh" /root/.zshrc; then
+    echo "source $PREFIX/bin/deux.zsh" >> /root/.zshrc
 fi
 
 echo "Deux has been installed successfully."
