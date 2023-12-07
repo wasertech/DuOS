@@ -10,13 +10,20 @@ fi
 pkg update -y
 
 # Install dependencies
-pkg install -y proot proot-distro git
+pkg install -y proot proot-distro git which
 
 # Install selected Linux distribution
 
 echo "Select a Linux distribution to install:"
 proot-distro list
-DUO_DISTRO=$(input "Enter the alias of the Linux distribution to install: ")
+DUO_DISTRO=$(/usr/bin/whiptail --title "Deux" --menu "Select a Linux distribution to install:" 15 60 4 \
+"alpine" "Alpine Linux" \
+"archlinux" "Arch Linux" \
+"debian" "Debian" \
+"fedora" "Fedora" \
+"gentoo" "Gentoo" \
+"manjaro" "Manjaro" \
+"ubuntu" "Ubuntu" 3>&1 1>&2 2>&3)
 proot-distro install $DUO_DISTRO
 
 # Clone deux.sh from GitHub
