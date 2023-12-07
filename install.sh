@@ -1,9 +1,5 @@
 set -e
 
-function input {
-    echo -n '${1}\n❯ '; read
-}
-
 # Check Termux version
 if [ ! -f $PREFIX/bin/termux-info ]; then
     echo "Termux is not installed."
@@ -20,7 +16,10 @@ pkg install -y proot proot-distro git which
 
 echo "Select a Linux distribution to install:"
 proot-distro list
-DUO_DISTRO=$(input "Enter the alias of the Linux distribution to install: ")
+
+echo -n "Enter the alias of the Linux distribution to install: "
+
+DUO_DISTRO=$(read)
 proot-distro install $DUO_DISTRO
 
 # Clone deux.sh from GitHub
