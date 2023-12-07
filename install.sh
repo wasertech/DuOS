@@ -35,7 +35,7 @@ proot-distro install $DUO_DISTRO || true
 if [ ! -f $PREFIX/bin/deux.sh ]; then
     tmpdir=$(mktemp -d /tmp/XXXXXX)
     duodir='${tmpdir}/deux-surfaces'
-    git clone https://github.com/wasertech/deux-surfaces.git ${tmpdir}/deux-surfaces
+    git clone https://github.com/wasertech/deux-surfaces.git ${duodir}
     cp ${duodir}/deux.sh ${PREFIX}/bin/deux.sh
 fi
 
