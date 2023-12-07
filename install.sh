@@ -17,10 +17,19 @@ proot-distro list
 $DUO_DISTRO=$(input "Enter the alias of the Linux distribution to install: ")
 proot-distro install $DUO_DISTRO
 
+# Clone deux.sh from GitHub
+
+if [ ! -d $HOME/.deux ]; then
+    git clone https://github.com/wasertech/deux-surfaces.git /tmp/deux-surfaces
+fi
+
 # Install deux.sh in $PREFIX/bin
 if [ ! -f $PREFIX/bin/deux.sh ]; then
-    cp deux.sh $PREFIX/bin/deux.sh
+    cp /tmp/deux-surfaces/deux.sh $PREFIX/bin/deux.sh
 fi
+
+# Make deux.sh executable
+chmod +x $PREFIX/bin/deux.sh
 
 # Make sure .bashrc exists
 if [ ! -f $HOME/.bashrc ]; then

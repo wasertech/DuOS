@@ -3,9 +3,8 @@ PREFIX  ?= usr/local
 
 install:
 	@echo -n "Installing..."
-	@mkdir -p $(DESTDIR)$(PREFIX)/bin
-	@cp -f $(TARGET) $(DESTDIR)$(PREFIX)/bin
-	@chmod 755 $(DESTDIR)$(PREFIX)/bin/$(TARGET)
+	@chmod 755 ./install.sh
+	@bash ./install.sh
 	@echo "Done!"
 
 uninstall:

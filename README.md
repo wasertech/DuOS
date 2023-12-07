@@ -31,6 +31,14 @@ wget https://raw.githubusercontent.com/Deux-Surfaces/Deux-Surfaces/main/install.
 bash install.sh
 ```
 
+Or clone the repository and run the installer:
+
+```bash
+git clone https://github.com/wasertech/deux-surfaces.git /tmp/deux-surfaces
+cd /tmp/deux-surfaces
+make install
+```
+
 3. Follow the instructions on the screen.
 4. Reboot your device.
 5. Enjoy!
@@ -40,4 +48,3 @@ bash install.sh
 wget https://raw.githubusercontent.com/Deux-Surfaces/Deux-Surfaces/main/install-gui.sh
 bash install-gui.sh
 ```
-
