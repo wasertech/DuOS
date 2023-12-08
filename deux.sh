@@ -47,7 +47,7 @@ function duo() {
     login $DUO_DISTRO --user $DUO_USER
 }
 
-if [ -z "$DUO_USER" ]; then
+if [ -z "$DUO_USER" ] && [ ! $DUO_DISTRO ]; then
     echo "No user is set."
     init
 fi
