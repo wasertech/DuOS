@@ -26,7 +26,7 @@ uname -a
 
 echo "You are $(whoami) on $(hostname)."
 
-function duo_update() {
+function duo-update() {
     echo "Updating DuOS..."
     
     # Check Termux version
@@ -161,8 +161,11 @@ function duo() {
     login $DUO_DISTRO --user $DUO_USER
 }
 
-echo "Running DuOS..."
-echo "Type 'exit' twice to exit."
-echo "You can also type 'duo' to login to the chroot environment."
+echo "DuOS is ready to use."
+echo "You can type:"
+echo " - 'duo' to log into DuOS"
+echo " - 'duo-update' to update DuOS"
+echo " - 'init' to initialize DuOS"
+echo
 
-duo
+# duo
