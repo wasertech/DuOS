@@ -32,6 +32,7 @@ function init() {
     login $DUO_DISTRO -- useradd -m -G wheel -s /bin/bash $DUO_USER
     login $DUO_DISTRO -- passwd $DUO_USER
 
+    echo "export DUO_USER=$DUO_USER" >> ~/.bashrc
     login $DUO_DISTRO -- echo "export DUO_USER=$DUO_USER" >> ~/.bashrc
     login $DUO_DISTRO -- echo "source deux.sh" >> ~/.bashrc
     login $DUO_DISTRO -- echo "export DUO_USER=$DUO_USER" >> ~/.zshrc
