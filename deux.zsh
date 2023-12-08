@@ -20,7 +20,7 @@ echo "You are $USER on ${HOST:-'localhost'}."
 fastfetch || neofetch || screenfetch || echo "Couldn't fetch system information."
 echo && echo # just for spacing
 
-echo "Welcome to DuOS: Linux on Android."
+echo "Welcome on DuOS: Linux on Android."
 
 echo "Type 'exit':"
 echo " - once to exit the chroot environment."
