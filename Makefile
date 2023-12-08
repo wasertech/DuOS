@@ -9,5 +9,6 @@ install:
 
 uninstall:
 	@echo -n "Uninstalling..."
-	@rm -rf $(DESTDIR)$(PREFIX)/bin/$(TARGET)
+	@rm -rf $(DESTDIR)$(PREFIX)/bin/deux.sh
+	@rm -rf $(DESTDIR)$(PREFIX)/bin/deux.zsh
 	@echo "Done!"
