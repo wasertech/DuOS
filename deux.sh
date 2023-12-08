@@ -53,8 +53,8 @@ function init() {
     login $DUO_DISTRO -- groupadd -g 10 wheel
     
     login $DUO_DISTRO -- mkdir -p /etc/default /etc/sudoers.d
-    login $DUO_DISTRO -- echo "GROUP=users" >> /etc/default/groupadd
-    login $DUO_DISTRO -- echo "%wheel ALL=(ALL) ALL" >> /etc/sudoers.d/10-installer
+    login $DUO_DISTRO -- awk 'BEGIN { print "GROUP=users" >> "/etc/default/groupadd" }'
+    login $DUO_DISTRO -- awk 'BEGIN { print "%wheel ALL=(ALL) ALL" >> "/etc/sudoers.d/10-installer" }'
 
     login $DUO_DISTRO -- useradd -m -G wheel -s /bin/zsh $DUO_USER && \
     login $DUO_DISTRO -- passwd $DUO_USER && \
@@ -64,9 +64,8 @@ function init() {
     echo "User account is ready."
 
     echo "Setting up the shell..."
-    login $DUO_DISTRO --user $DUO_USER -- ls -la /home/$DUO_USER
-    login $DUO_DISTRO --user $DUO_USER -- echo "export DUO_USER=$DUO_USER" >> /home/$DUO_USER/.zshrc
-    login $DUO_DISTRO --user $DUO_USER -- echo "source deux.zsh" >> /home/$DUO_USER/.zshrc
+    login $DUO_DISTRO --user $DUO_USER -- awk 'BEGIN { print "export DUO_USER=$DUO_USER" >> "/home/$DUO_USER/.zshrc" }'
+    login $DUO_DISTRO --user $DUO_USER -- awk 'BEGIN { print "source deux.zsh" >> "/home/$DUO_USER/.zshrc" }'
 }
 
 function duo() {
