@@ -52,7 +52,7 @@ function init() {
     login $DUO_DISTRO -- passwd $DUO_USER
 
     login $DUO_DISTRO -- usermod -aG wheel $DUO_USER
-    
+    login $DUO_DISTRO -- usermod -aG sudo $DUO_USER
     
     login $DUO_DISTRO -- echo "export DUO_USER=$DUO_USER" >> ~/.bashrc
     login $DUO_DISTRO -- echo "source deux.sh" >> ~/.bashrc
@@ -78,5 +78,9 @@ function duo() {
     # Login to the chroot environment
     login $DUO_DISTRO --user $DUO_USER
 }
+
+echo "Running duo..."
+echo "Type 'exit' twice to exit."
+echo "You can also type 'duo' to login to the chroot environment."
 
 duo
