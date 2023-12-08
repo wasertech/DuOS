@@ -7,7 +7,7 @@
 # Check if pRoot and pRoot-distro are installed
 if ! command -v proot >/dev/null 2>&1 || ! command -v proot-distro >/dev/null 2>&1; then
     echo "pRoot and pRoot-distro are not installed."
-    exit 1
+    # exit 1
 fi
 
 if [ -z "$DUO_DISTRO" ]; then
@@ -29,10 +29,19 @@ echo "You are $(whoami) on $(hostname)."
 function init() {
     echo "User creation"
     # create user interactively w/ administrative privileges
-    read -p "Enter the username of the user to create: " DUO_USER
+    read -p "Enter the username of the user to create: " DUO_USER false
+    
+    if [ -z "$DUO_USER" ]; then
+        echo "Please enter a username."
+        return 1
+    fi
+
+    login $DUO_DISTRO -- pacman -Syyu
+    login $DUO_DISTRO -- pacman -S base-devel git neovim fastfetch zsh
+
     login $DUO_DISTRO -- useradd -m -G wheel -s /bin/bash $DUO_USER
     login $DUO_DISTRO -- passwd $DUO_USER
-
+    
     echo "export DUO_USER=$DUO_USER" >> ~/.bashrc
     login $DUO_DISTRO -- echo "export DUO_USER=$DUO_USER" >> ~/.bashrc
     login $DUO_DISTRO -- echo "source deux.sh" >> ~/.bashrc
@@ -47,7 +56,7 @@ function duo() {
     login $DUO_DISTRO --user $DUO_USER
 }
 
-if [ -z "$DUO_USER" ] && [ ! $DUO_DISTRO ]; then
+if [ -z "$DUO_USER" ]; then
     echo "No user is set."
     init
 fi
