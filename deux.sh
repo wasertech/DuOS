@@ -53,8 +53,14 @@ function init() {
     login $DUO_DISTRO -- groupadd -g 10 wheel
     
     login $DUO_DISTRO -- mkdir -p /etc/default /etc/sudoers.d
-    login $DUO_DISTRO -- awk 'BEGIN { print "GROUP=users" >> "/etc/default/groupadd" }'
-    login $DUO_DISTRO -- awk 'BEGIN { print "%wheel ALL=(ALL) ALL" >> "/etc/sudoers.d/10-installer" }'
+    
+    if [ ! -f /etc/default/groupadd ]; then
+        login $DUO_DISTRO -- awk 'BEGIN { print "GROUP=users" >> "/etc/default/groupadd" }'
+    fi
+    
+    if [ ! -f /etc/sudoers.d/10-installer ]; then
+        login $DUO_DISTRO -- awk 'BEGIN { print "%wheel ALL=(ALL) ALL" >> "/etc/sudoers.d/10-installer" }'
+    fi
 
     login $DUO_DISTRO -- useradd -m -G wheel -s /bin/zsh $DUO_USER && \
     login $DUO_DISTRO -- passwd $DUO_USER && \
@@ -64,8 +70,13 @@ function init() {
     echo "User account is ready."
 
     echo "Setting up the shell..."
-    login $DUO_DISTRO --user $DUO_USER -- awk 'BEGIN { print "export DUO_USER=$DUO_USER" >> "/home/$DUO_USER/.zshrc" }'
-    login $DUO_DISTRO --user $DUO_USER -- awk 'BEGIN { print "source deux.zsh" >> "/home/$DUO_USER/.zshrc" }'
+    if [ -z "$DUO_USER" ]; then
+        echo "No user is set."
+        init
+    fi
+
+    login $DUO_DISTRO --user $DUO_USER -- awk -v user="$DUO_USER" 'BEGIN { print "export DUO_USER=" user >> "/home/" user "/.zshrc" }'
+    login $DUO_DISTRO --user $DUO_USER -- awk -v user="$DUO_USER" 'BEGIN { print "source deux.zsh" >> "/home/" user "/.zshrc" }'
 }
 
 function duo() {
