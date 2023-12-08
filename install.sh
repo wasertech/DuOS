@@ -23,6 +23,10 @@ echo "Just hit enter if this option sounds appealing."
 
 read -p '❯  ' DUO_DISTRO 'manjaro'
 
+if [ -z "$DUO_DISTRO" ]; then
+    DUO_DISTRO="manjaro"
+fi
+
 proot-distro install $DUO_DISTRO || true
 
 # Clone deux.sh from GitHub
