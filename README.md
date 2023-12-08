@@ -1,4 +1,4 @@
-# Deux Surfaces (Surface Duo)
+# DuOS: Deux Surfaces (Surface Duo)
 
 My favorite GNU/Linux flavor on the Microsoft Surface Duo.
 

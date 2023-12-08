@@ -1,5 +1,5 @@
 #!/bin/bash
-# Deux (Operating Systems): Linux on Android
+# DuOS (Duo Operating Systems): Linux on Android
 # This script is used to run a Linux distribution in a chroot environment on any Android device.
 
 # set -e
@@ -26,8 +26,67 @@ uname -a
 
 echo "You are $(whoami) on $(hostname)."
 
-function urun() {
-    login $DUO_DISTRO -- $@
+function duo_update() {
+    echo "Updating DuOS..."
+    
+    # Check Termux version
+    if [ ! -f $PREFIX/bin/termux-info ]; then
+        echo "Termux is not installed."
+        return 1
+    fi
+
+    # Update Termux packages
+    pkg update -y
+
+    # Install dependencies
+    pkg install -y proot proot-distro git which
+
+    # Install deux.sh in $PREFIX/bin
+    mkdir -p $PREFIX/bin
+    tmpdir=$(mktemp -d XXXXXX)
+    duodir=${tmpdir}/deux-surfaces
+    git clone https://github.com/wasertech/deux-surfaces.git ${duodir}
+    rm -rf ${PREFIX}/bin/deux.sh && \
+    rm -rf ${PREFIX}/bin/deux.zsh && \
+    cp ${duodir}/deux.sh ${PREFIX}/bin/deux.sh && \
+    cp ${duodir}/deux.zsh ${PREFIX}/bin/deux.zsh && \
+    rm -rf ${tmpdir} || echo "Couldn't install deux."
+
+    # Make deux.sh executable
+    chmod +x $PREFIX/bin/deux.sh
+    chmod +x $PREFIX/bin/deux.zsh
+
+    # Make sure Temrmux's default user's .bashrc exists
+    if [ ! -f $HOME/.bashrc ]; then
+        touch $HOME/.bashrc
+    fi
+
+    if grep -q "DUO_DISTRO" $HOME/.bashrc; then
+        echo "DUO_DISTRO is already set in .bashrc."
+    fi
+
+    if ! grep -q "DUO_DISTRO" $HOME/.bashrc; then
+        echo "export DUO_DISTRO='${DUO_DISTRO}'" >> $HOME/.bashrc
+    fi
+
+    # Check if deux.sh is already sourced in .bashrc
+
+    if grep -q "deux.sh" $HOME/.bashrc; then
+        echo "deux.sh is already sourced in .bashrc."
+    fi
+
+    # Source deux.sh in .bashrc
+
+    if ! grep -q "deux.sh" $HOME/.bashrc; then
+        echo "source deux.sh" >> $HOME/.bashrc
+    fi
+
+    echo "Update complete."
+    echo "DuOS has been updated successfully."
+    echo "Type 'duo' or restart Termux, to start using it."
+    echo
+
+    return true
 }
 
 function init() {
@@ -80,6 +139,7 @@ function init() {
     login $DUO_DISTRO --user $DUO_USER -- awk -v user="$DUO_USER" 'BEGIN { print "source deux.zsh" >> "/home/" user "/.zshrc" }'
 
     echo "Initialisation complete."
+    return true
 }
 
 function duo() {

@@ -1,3 +1,6 @@
+#!/bin/bash
+# Installer script for DuOS
+
 set -e
 
 # Check Termux version
@@ -44,6 +47,7 @@ rm -rf ${tmpdir} || echo "Couldn't install deux."
 
 # Make deux.sh executable
 chmod +x $PREFIX/bin/deux.sh
+chmod +x $PREFIX/bin/deux.zsh
 
 # Make sure Temrmux's default user's .bashrc exists
 if [ ! -f $HOME/.bashrc ]; then
@@ -100,4 +104,5 @@ fi
 # fi
 
 echo "Deux has been installed successfully."
-echo "Type bash or restart Termux to start using it."
+echo "Type 'duo' or restart Termux, to start using it."
+echo

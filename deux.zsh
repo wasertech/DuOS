@@ -1,6 +1,12 @@
-#!/bin/bash
-# Deux (Operating Systems): Linux on Android
+#!/bin/zsh
+# DuOS (Operating Systems): Linux on Android
 # This script is used to run a Linux distribution in a chroot environment on any Android device.
+
+function duo_update() {
+    echo "Cannot update DuOS from within DuOS."
+    echo "Please exit DuOS and run 'duo_update' from Termux."
+    return false
+}
 
 # Print user and system information
 uname -a
