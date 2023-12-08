@@ -52,13 +52,20 @@ function init() {
 
 function duo() {
     echo "Welcome on Duo!"
+
+    # Make sure $DUO_{USER,DISTRO} are set
+    if [ -z "$DUO_USER" ]; then
+        echo "No user is set."
+        init
+    fi
+
+    if [ -z "$DUO_DISTRO" ]; then
+        echo "No distribution is set."
+        DUO_DISTRO="manjaro"
+    fi
+
     # Login to the chroot environment
     login $DUO_DISTRO --user $DUO_USER
 }
-
-if [ -z "$DUO_USER" ]; then
-    echo "No user is set."
-    init
-fi
 
 duo
