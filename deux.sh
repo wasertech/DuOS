@@ -10,9 +10,10 @@ if ! command -v proot >/dev/null 2>&1 || ! command -v proot-distro >/dev/null 2>
     exit 1
 fi
 
-if [ ! -z "$DUO_DISTRO" ]; then
+if [ -z "$DUO_DISTRO" ]; then
     echo "No distribution is set."
-    exit 1
+    DUO_DISTRO="manjaro"
+    echo "export DUO_DISTRO=$DUO_DISTRO" >> ~/.bashrc
 fi
 
 # Set aliases
@@ -46,7 +47,7 @@ function duo() {
     login $DUO_DISTRO --user $DUO_USER
 }
 
-if [ ! -z "$DUO_USER" ]; then
+if [ -z "$DUO_USER" ]; then
     echo "No user is set."
     init
 fi
