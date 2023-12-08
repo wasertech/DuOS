@@ -11,7 +11,7 @@ echo "You are $USER on ${HOST:-'localhost'}."
 
 # Print user and system information
 
-fetch
+fastfetch || neofetch || screenfetch || echo "Couldn't fetch system information."
 
 echo "Welcome to DuOS: Linux on Android."
 
