@@ -53,11 +53,9 @@ function init() {
 
     login $DUO_DISTRO -- usermod -aG wheel $DUO_USER
     login $DUO_DISTRO -- usermod -aG sudo $DUO_USER
-    
-    login $DUO_DISTRO -- echo "export DUO_USER=$DUO_USER" >> ~/.bashrc
-    login $DUO_DISTRO -- echo "source deux.sh" >> ~/.bashrc
-    login $DUO_DISTRO --user $DUO_USER -- echo "export DUO_USER=$DUO_USER" >> ~/.zshrc
-    login $DUO_DISTRO --user $DUO_USER -- echo "source deux.zsh" >> ~/.zshrc
+        
+    login $DUO_DISTRO --user $DUO_USER -- echo "export DUO_USER=$DUO_USER" >> /home/$DUO_USER/.zshrc
+    login $DUO_DISTRO --user $DUO_USER -- echo "source deux.zsh" >> /home/$DUO_USER/.zshrc
     echo "User created successfully."
 }
 
