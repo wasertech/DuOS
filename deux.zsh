@@ -12,6 +12,7 @@ echo "You are $USER on ${HOST:-'localhost'}."
 # Print user and system information
 
 fastfetch || neofetch || screenfetch || echo "Couldn't fetch system information."
+echo && echo # just for spacing
 
 echo "Welcome to DuOS: Linux on Android."
 
