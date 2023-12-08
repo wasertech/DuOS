@@ -18,49 +18,27 @@ alias fetch='fastfetch'
 # Print user and system information
 uname -a
 
-echo "You are $USER on $HOST."
-
-# Make sure the user is in the right directory
-cd $HOME
-
-RELEASE=$(cat /etc/arch-release || echo "None" )
+echo "You are $(whoami) on $(hostname)."
 
 function init() {
-    
-    if [ $RELEASE == "Manjaro ARM" ] || [ $RELEASE == "arch" ]; then
-            # update system
-        $pkglist = "base-devel \
-        git \
-        neovim \
-        fastfetch \
-        zsh"
-        pacman -Syyu
-        pacman -S $pkglist
+    echo "User creation"
+    # create user interactively w/ administrative privileges
+    read -p "Enter the username of the user to create: " DUO_USER
+    useradd -m -G wheel -s /bin/bash $DUO_USER
+    passwd $DUO_USER
 
-        fastfetch
-
-        # create user interactively w/ administrative privileges
-        DUO_USER=$(input "Enter the username of the user to create: ")
-        useradd -m -G wheel -s /bin/bash $DUO_USER
-        passwd $DUO_USER
-
-        echo "export DUO_USER=${DUO_USER}" >> ~/.zshrc
-        echo "User created successfully."
-
-        # log in as user
-        su $DUO_USER
-    else
-        echo "Unsupported Linux distribution."
-        return 1
-    fi
-
+    login $DUO_DISTRO -- -c echo "export DUO_USER=$DUO_USER" >> ~/.bashrc
+    login $DUO_DISTRO -- -c echo "source deux.sh" >> ~/.bashrc
+    login $DUO_DISTRO -- -c echo "export DUO_USER=$DUO_USER" >> ~/.zshrc
+    login $DUO_DISTRO -- -c echo "source deux.zsh" >> ~/.zshrc
+    echo "User created successfully."
 }
 
 function duo() {
     echo "Welcome on Duo!"
 
     # Login to the chroot environment
-    login $DUO_DISTRO
+    login $DUO_DISTRO --user $USER
 }
 
 function duo-user() {
