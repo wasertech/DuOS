@@ -56,8 +56,8 @@ function init() {
     
     login $DUO_DISTRO -- echo "export DUO_USER=$DUO_USER" >> ~/.bashrc
     login $DUO_DISTRO -- echo "source deux.sh" >> ~/.bashrc
-    login $DUO_DISTRO -- echo "export DUO_USER=$DUO_USER" >> ~/.zshrc
-    login $DUO_DISTRO -- echo "source deux.zsh" >> ~/.zshrc
+    login $DUO_DISTRO --user $DUO_USER -- echo "export DUO_USER=$DUO_USER" >> ~/.zshrc
+    login $DUO_DISTRO --user $DUO_USER -- echo "source deux.zsh" >> ~/.zshrc
     echo "User created successfully."
 }
 
