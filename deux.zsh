@@ -5,7 +5,7 @@
 function duo_update() {
     echo "Cannot update DuOS from within DuOS."
     echo "Please exit DuOS and run 'duo_update' from Termux."
-    return false
+    return 1
 }
 
 # Print user and system information

@@ -86,7 +86,7 @@ function duo-update() {
     echo "Type 'duo' or restart Termux, to start using it."
     echo
 
-    return true
+    return 0
 }
 
 function init() {
@@ -139,7 +139,7 @@ function init() {
     login $DUO_DISTRO --user $DUO_USER -- awk -v user="$DUO_USER" 'BEGIN { print "source deux.zsh" >> "/home/" user "/.zshrc" }'
 
     echo "Initialisation complete."
-    return true
+    return 0
 }
 
 function duo() {
