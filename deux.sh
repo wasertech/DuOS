@@ -36,21 +36,24 @@ function init() {
         return 1
     fi
 
+    echo "export DUO_USER=$DUO_USER" >> ~/.bashrc
+
     login $DUO_DISTRO -- pacman -Syyu
     login $DUO_DISTRO -- pacman -S base-devel git neovim fastfetch zsh
 
     login $DUO_DISTRO -- groupadd -g 100 users 
     login $DUO_DISTRO -- groupadd -g 10 wheel
 
+    login $DUO_DISTRO -- mkdir -p /etc/default /etc/sudoers.d
     login $DUO_DISTRO -- echo "GROUP=users" >> /etc/default/groupadd
     login $DUO_DISTRO -- echo "%wheel ALL=(ALL) ALL" >> /etc/sudoers.d/10-installer
 
-    login $DUO_DISTRO -- useradd -m -G wheel -s /bin/bash $DUO_USER
+    login $DUO_DISTRO -- useradd -m -G wheel -s /bin/zsh $DUO_USER
     login $DUO_DISTRO -- passwd $DUO_USER
 
     login $DUO_DISTRO -- usermod -aG wheel $DUO_USER
     
-    echo "export DUO_USER=$DUO_USER" >> ~/.bashrc
+    
     login $DUO_DISTRO -- echo "export DUO_USER=$DUO_USER" >> ~/.bashrc
     login $DUO_DISTRO -- echo "source deux.sh" >> ~/.bashrc
     login $DUO_DISTRO -- echo "export DUO_USER=$DUO_USER" >> ~/.zshrc
