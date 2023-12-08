@@ -81,7 +81,7 @@ fi
 # Source deux.sh in .bashrc
 
 if ! grep -q "deux.sh" $HOME/.bashrc; then
-    echo "source $PREFIX/bin/deux.sh" >> $HOME/.bashrc
+    echo "source deux.sh" >> $HOME/.bashrc
 fi
 
 # # Make sure .zshrc exists
