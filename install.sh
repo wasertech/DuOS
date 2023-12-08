@@ -21,11 +21,7 @@ echo "Enter the alias of the Linux distribution to install..."
 echo "Default: manjaro"
 echo "Just hit enter if this option sounds appealing."
 
-read -p '❯  ' DUO_DISTRO
-
-if [ ! -z $DUO_DISTRO ]; then
-    DUO_DISTRO='manjaro'
-fi
+read -p '❯  ' DUO_DISTRO 'manjaro'
 
 proot-distro install $DUO_DISTRO || true
 

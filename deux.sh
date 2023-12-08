@@ -12,7 +12,7 @@ fi
 
 if [ -z "$DUO_DISTRO" ]; then
     echo "No distribution is set."
-    return 1
+    exit 1
 fi
 
 # Set aliases
