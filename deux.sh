@@ -7,7 +7,7 @@
 # Check if pRoot and pRoot-distro are installed
 if ! command -v proot >/dev/null 2>&1 || ! command -v proot-distro >/dev/null 2>&1; then
     echo "pRoot and pRoot-distro are not installed."
-    # exit 1
+    exit 1
 fi
 
 if [ -z "$DUO_DISTRO" ]; then
