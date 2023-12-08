@@ -29,8 +29,8 @@ function init() {
     echo "User creation"
     # create user interactively w/ administrative privileges
     read -p "Enter the username of the user to create: " DUO_USER
-    useradd -m -G wheel -s /bin/bash $DUO_USER
-    passwd $DUO_USER
+    login $DUO_DISTRO -- -c useradd -m -G wheel -s /bin/bash $DUO_USER
+    login $DUO_DISTRO -- -c passwd $DUO_USER
 
     login $DUO_DISTRO -- -c echo "export DUO_USER=$DUO_USER" >> ~/.bashrc
     login $DUO_DISTRO -- -c echo "source deux.sh" >> ~/.bashrc
