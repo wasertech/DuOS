@@ -2,7 +2,7 @@
 # Deux (Operating Systems): Linux on Android
 # This script is used to run a Linux distribution in a chroot environment on any Android device.
 
-set -e
+# set -e
 
 # Check if pRoot and pRoot-distro are installed
 if ! command -v proot >/dev/null 2>&1 || ! command -v proot-distro >/dev/null 2>&1; then
