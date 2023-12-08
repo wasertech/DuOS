@@ -10,7 +10,7 @@ if ! command -v proot >/dev/null 2>&1 || ! command -v proot-distro >/dev/null 2>
     exit 1
 fi
 
-if [ -z "$DUO_DISTRO" ]; then
+if [ ! -z "$DUO_DISTRO" ]; then
     echo "No distribution is set."
     exit 1
 fi
