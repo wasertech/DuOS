@@ -10,6 +10,11 @@ if ! command -v proot >/dev/null 2>&1 || ! command -v proot-distro >/dev/null 2>
     exit 1
 fi
 
+if [ -z "$DUO_DISTRO" ]; then
+    echo "No distribution is set."
+    return 1
+fi
+
 # Set aliases
 alias which='$(command -v)'
 alias login='proot-distro login'
@@ -36,30 +41,13 @@ function init() {
 
 function duo() {
     echo "Welcome on Duo!"
-
     # Login to the chroot environment
-    login $DUO_DISTRO --user $USER
+    login $DUO_DISTRO --user $DUO_USER
 }
 
-function duo-user() {
-    if [ -z "$DUO_USER" ]; then
-        echo "No user is set."
-        return 1
-    fi
-
-    su $DUO_USER
-}
-
-if [[ "$HOME" == '/root' && "$RELEASE" == "Manjaro ARM" ]]; then
-    if [ -z "$DUO_USER" ]; then
-        init
-    fi
-    duo-user
-elif [ "$RELEASE" != "Manjaro ARM" ]; then
-    # echo "Deux is ready to use."
-    # echo "Type 'duo' to start the chroot environment."
-    clear
-    duo
-elif [ -z "$DUO_USER" ] && [ "$RELEASE" == "Manjaro ARM" ]; then
-    su "$DUO_USER"
+if [ -z "$DUO_USER" ]; then
+    echo "No user is set."
+    init
 fi
+
+duo
