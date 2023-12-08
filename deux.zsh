@@ -24,4 +24,8 @@ clear
 
 fetch
 
-echo "Type 'exit' twice to exit."
+echo "Welcome to DuOS: Linux on Android."
+
+echo "Type 'exit':"
+echo " - once to exit the chroot environment."
+echo " - twice to exit Termux."

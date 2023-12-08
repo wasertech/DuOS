@@ -31,21 +31,7 @@ function urun() {
 }
 
 function init() {
-    echo "User creation"
-    # create user interactively w/ administrative privileges
-    read -p "Enter the username of the user to create: " DUO_USER false
-    
-    if [ -z "$DUO_USER" ]; then
-        echo "Please enter a username."
-        return 1
-    fi
-
-    if ! grep -q "export DUO_USER=$DUO_USER" ~/.bashrc; then
-        sed -i '/source deux.sh/d' ~/.bashrc
-        echo "export DUO_USER=$DUO_USER" >> ~/.bashrc
-        echo "source deux.sh" >> ~/.bashrc
-    fi
-    
+    echo "Initializing the chroot environment..."
     login $DUO_DISTRO -- pacman -Syyu
     login $DUO_DISTRO -- pacman -S base-devel git neovim fastfetch zsh
 
@@ -60,6 +46,21 @@ function init() {
     
     if [ ! -f /etc/sudoers.d/10-installer ]; then
         login $DUO_DISTRO -- awk 'BEGIN { print "%wheel ALL=(ALL) ALL" >> "/etc/sudoers.d/10-installer" }'
+    fi
+
+    echo "User creation"
+    # create user interactively w/ administrative privileges
+    read -p "Enter the username of the user to create: " DUO_USER false
+    
+    if [ -z "$DUO_USER" ]; then
+        echo "Please enter a username."
+        return 1
+    fi
+
+    if ! grep -q "export DUO_USER=$DUO_USER" ~/.bashrc; then
+        sed -i '/source deux.sh/d' ~/.bashrc
+        echo "export DUO_USER=$DUO_USER" >> ~/.bashrc
+        echo "source deux.sh" >> ~/.bashrc
     fi
 
     login $DUO_DISTRO -- useradd -m -G wheel -s /bin/zsh $DUO_USER && \
@@ -77,6 +78,8 @@ function init() {
 
     login $DUO_DISTRO --user $DUO_USER -- awk -v user="$DUO_USER" 'BEGIN { print "export DUO_USER=" user >> "/home/" user "/.zshrc" }'
     login $DUO_DISTRO --user $DUO_USER -- awk -v user="$DUO_USER" 'BEGIN { print "source deux.zsh" >> "/home/" user "/.zshrc" }'
+
+    echo "Initialisation complete."
 }
 
 function duo() {
