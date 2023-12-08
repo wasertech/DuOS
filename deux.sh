@@ -64,7 +64,7 @@ function init() {
     echo "User account is ready."
 
     echo "Setting up the shell..."
-    login $DUO_DISTRO --user $DUO_USER -- mkdir -p /home/$DUO_USER/.config
+    login $DUO_DISTRO --user $DUO_USER -- ls -la /home/$DUO_USER
     login $DUO_DISTRO --user $DUO_USER -- echo "export DUO_USER=$DUO_USER" >> /home/$DUO_USER/.zshrc
     login $DUO_DISTRO --user $DUO_USER -- echo "source deux.zsh" >> /home/$DUO_USER/.zshrc
 }
