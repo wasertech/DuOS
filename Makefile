@@ -9,5 +9,5 @@ install:
 
 uninstall:
 	@echo -n "Uninstalling..."
-	@rm -f $(DESTDIR)$(PREFIX)/bin/$(TARGET)
+	@rm -rf $(DESTDIR)$(PREFIX)/bin/$(TARGET)
 	@echo "Done!"
