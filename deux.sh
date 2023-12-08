@@ -26,6 +26,10 @@ uname -a
 
 echo "You are $(whoami) on $(hostname)."
 
+function urun() {
+    login $DUO_DISTRO -- $@
+}
+
 function init() {
     echo "User creation"
     # create user interactively w/ administrative privileges
@@ -57,12 +61,12 @@ function init() {
     echo "User created successfully." || echo "Couldn't create user (probably already exists)."
 
     login $DUO_DISTRO -- usermod -aG wheel $DUO_USER
-
     echo "User account is ready."
 
     echo "Setting up the shell..."
-    login $DUO_DISTRO -- echo "export DUO_USER=$DUO_USER" >> /home/$DUO_USER/.zshrc
-    login $DUO_DISTRO -- echo "source deux.zsh" >> /home/$DUO_USER/.zshrc
+    login $DUO_DISTRO --user $DUO_USER -- mkdir -p /home/$DUO_USER/.config
+    login $DUO_DISTRO --user $DUO_USER -- echo "export DUO_USER=$DUO_USER" >> /home/$DUO_USER/.zshrc
+    login $DUO_DISTRO --user $DUO_USER -- echo "source deux.zsh" >> /home/$DUO_USER/.zshrc
 }
 
 function duo() {
