@@ -103,6 +103,6 @@ fi
 #     echo "source $PREFIX/bin/deux.zsh" >> /root/.zshrc
 # fi
 
-echo "Deux has been installed successfully."
+echo "DuOS has been installed successfully."
 echo "Type 'duo' or restart Termux, to start using it."
 echo
