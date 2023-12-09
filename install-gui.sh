@@ -67,11 +67,9 @@ SERVICE_FILE="/etc/systemd/system/tigervnc@:1.service"
 
 proot-distro login $DUO_DISTRO -- awk -v sfile="$SERVICE_FILE" 'BEGIN { print "[Unit]\nDescription=Remote desktop service (VNC)\nAfter=syslog.target network.target\n\n[Service]\nType=simple\nUser=$USER\nPAMName=login\nPIDFile=/home/$USER/.vnc/%H%i.pid\nExecStart=/usr/bin/vncserver :1\nExecStop=/usr/bin/vncserver -kill %i\n\n[Install]\nWantedBy=multi-user.target\n" > sfile }'
 
-# Enable GDM Mobile
-proot-distro login $DUO_DISTRO -- systemctl enable gdb-mobile.service
-proot-distro login $DUO_DISTRO -- systemctl start gdb-mobile.service
-
-proot-distro login $DUO_DISTRO -- systemctl enable tigervnc@:1.service
-proot-distro login $DUO_DISTRO -- systemctl start tigervnc@:1.service
-
 echo "Everything should be ready."
+
+# Systemd is not supported in Termux
+# How would someone connect to the VNC server?
+
+echo "To start the VNC server, run 'vncserver :1' in the chroot environment."
