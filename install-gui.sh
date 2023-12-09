@@ -65,21 +65,7 @@ proot-distro login $DUO_DISTRO --user $DUO_USER -- awk -v geometry="$DISPLAY_SIZ
 # Create a new systemd service file for TigerVNC
 SERVICE_FILE="/etc/systemd/system/tigervnc@:1.service"
 
-proot-distro login $DUO_DISTRO -- awk -v sfile="$SERVICE_FILE" 'BEGIN { print "[Unit]
-Description=Remote desktop service (VNC)
-After=syslog.target network.target
-
-[Service]
-Type=simple
-User=$USER
-PAMName=login
-PIDFile=/home/$USER/.vnc/%H%i.pid
-ExecStart=/usr/bin/vncserver :1
-ExecStop=/usr/bin/vncserver -kill %i
-
-[Install]
-WantedBy=multi-user.target
-" > sfile }'
+proot-distro login $DUO_DISTRO -- awk -v sfile="$SERVICE_FILE" 'BEGIN { print "[Unit]\nDescription=Remote desktop service (VNC)\nAfter=syslog.target network.target\n\n[Service]\nType=simple\nUser=$USER\nPAMName=login\nPIDFile=/home/$USER/.vnc/%H%i.pid\nExecStart=/usr/bin/vncserver :1\nExecStop=/usr/bin/vncserver -kill %i\n\n[Install]\nWantedBy=multi-user.target\n" > sfile }'
 
 # Enable GDM
 proot-distro login $DUO_DISTRO -- systemctl enable gdm.service
