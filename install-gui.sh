@@ -41,12 +41,6 @@ fi
 # pacman-mirrors --api --set-branch unstable
 # pacman-mirrors --fasttrack 5 && pacman -Syyu
 
-# Install GDM
-proot-distro login $DUO_DISTRO -- pacman -S gdm --noconfirm
-
-# Remove gnome-shell
-proot-distro login $DUO_DISTRO -- pacman -R gdm gnome-shell --noconfirm
-
 # Install Gnome Shell Mobile
 proot-distro login $DUO_DISTRO -- pacman -S gnome-shell-mobile --noconfirm
 
