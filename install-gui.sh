@@ -42,21 +42,21 @@ fi
 # pacman-mirrors --fasttrack 5 && pacman -Syyu
 
 # Install GDM
-login $DUO_DISTRO --user $DUO_USER -- pacman -S gdm --noconfirm
+proot-distro login $DUO_DISTRO --user $DUO_USER -- pacman -S gdm --noconfirm
 
 # Install Gnome Shell Mobile
-login $DUO_DISTRO --user $DUO_USER -- pacman -S gnome-shell-mobile --noconfirm
+proot-distro login $DUO_DISTRO --user $DUO_USER -- pacman -S gnome-shell-mobile --noconfirm
 
 # Install pamac
-login $DUO_DISTRO --user $DUO_USER -- pacman -S --noconfirm \
+proot-distro login $DUO_DISTRO --user $DUO_USER -- pacman -S --noconfirm \
 libpamac \
 pamac-gtk \
 pamac-cli \
 pamac-flatpak-plugin \
 pamac-gnome-integration
 
-login $DUO_DISTRO --user $DUO_USER -- vncpasswd
-login $DUO_DISTRO --user $DUO_USER --  '
+proot-distro login $DUO_DISTRO --user $DUO_USER -- vncpasswd
+proot-distro login $DUO_DISTRO --user $DUO_USER --  '
     # Configure VNC to use GNOME Mobile Shell
     echo "session=gnome-shell-mobile" > ~/.vnc/config
     echo "geometry=1920x1080" >> ~/.vnc/config
@@ -82,10 +82,10 @@ WantedBy=multi-user.target
 '
 
 # Enable GDM
-login $DUO_DISTRO --user $DUO_USER -- systemctl enable gdm.service
-login $DUO_DISTRO --user $DUO_USER -- systemctl start gdm.service
+proot-distro login $DUO_DISTRO --user $DUO_USER -- systemctl enable gdm.service
+proot-distro login $DUO_DISTRO --user $DUO_USER -- systemctl start gdm.service
 
-login $DUO_DISTRO --user $DUO_USER -- systemctl enable tigervnc@:1.service
-login $DUO_DISTRO --user $DUO_USER -- systemctl start tigervnc@:1.service
+proot-distro login $DUO_DISTRO --user $DUO_USER -- systemctl enable tigervnc@:1.service
+proot-distro login $DUO_DISTRO --user $DUO_USER -- systemctl start tigervnc@:1.service
 
 echo "Everything should be ready."
