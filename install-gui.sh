@@ -7,8 +7,8 @@ set -xe
 
 # Check Termux version
 if [ ! -f $PREFIX/bin/termux-info ]; then
-    echo "Termux is not installed."
-    return 1
+  echo "Termux is not installed."
+  return 1
 fi
 
 # Update Termux packages
@@ -28,13 +28,13 @@ bash install.sh
 
 
 if [ -z "$DUO_DISTRO" ]; then
-    echo "No distribution is set."
-    DUO_DISTRO="manjaro"
+  echo "No distribution is set."
+  DUO_DISTRO="manjaro"
 fi
 
 if [ -z "$DUO_USER" ]; then
-    echo "No user is set."
-    exit 1
+  echo "No user is set."
+  exit 1
 fi
 
 # switch to unstable branch (may not be required anymore)
@@ -42,28 +42,28 @@ fi
 # pacman-mirrors --fasttrack 5 && pacman -Syyu
 
 # Install GDM
-proot-distro login $DUO_DISTRO --user $DUO_USER -- pacman -S gdm --noconfirm
+proot-distro login $DUO_DISTRO -- pacman -S gdm --noconfirm
 
 # Install Gnome Shell Mobile
-proot-distro login $DUO_DISTRO --user $DUO_USER -- pacman -S gnome-shell-mobile --noconfirm
+proot-distro login $DUO_DISTRO -- pacman -S gnome-shell-mobile --noconfirm
 
 # Install pamac
-proot-distro login $DUO_DISTRO --user $DUO_USER -- pacman -S --noconfirm \
+proot-distro login $DUO_DISTRO -- pacman -S --noconfirm \
 libpamac \
 pamac-gtk \
 pamac-cli \
 pamac-flatpak-plugin \
 pamac-gnome-integration
 
-proot-distro login $DUO_DISTRO --user $DUO_USER -- vncpasswd
-proot-distro login $DUO_DISTRO --user $DUO_USER --  '
-    # Configure VNC to use GNOME Mobile Shell
-    echo "session=gnome-shell-mobile" > ~/.vnc/config
-    echo "geometry=1920x1080" >> ~/.vnc/config
+proot-distro login $DUO_DISTRO -- vncpasswd
+proot-distro login $DUO_DISTRO -- '
+  # Configure VNC to use GNOME Mobile Shell
+  echo "session=gnome-shell-mobile" > ~/.vnc/config
+  echo "geometry=1920x1080" >> ~/.vnc/config
 
-    # Create a new systemd service file for TigerVNC
-    SERVICE_FILE="/etc/systemd/system/tigervnc@:1.service"
-    bash -c "cat > $SERVICE_FILE" <<EOF
+  # Create a new systemd service file for TigerVNC
+  SERVICE_FILE="/etc/systemd/system/tigervnc@:1.service"
+  bash -c "cat > $SERVICE_FILE" <<EOF
 [Unit]
 Description=Remote desktop service (VNC)
 After=syslog.target network.target
@@ -78,14 +78,14 @@ ExecStop=/usr/bin/vncserver -kill %i
 
 [Install]
 WantedBy=multi-user.target
-    EOF
+   EOF
 '
 
 # Enable GDM
-proot-distro login $DUO_DISTRO --user $DUO_USER -- systemctl enable gdm.service
-proot-distro login $DUO_DISTRO --user $DUO_USER -- systemctl start gdm.service
+proot-distro login $DUO_DISTRO -- systemctl enable gdm.service
+proot-distro login $DUO_DISTRO -- systemctl start gdm.service
 
-proot-distro login $DUO_DISTRO --user $DUO_USER -- systemctl enable tigervnc@:1.service
-proot-distro login $DUO_DISTRO --user $DUO_USER -- systemctl start tigervnc@:1.service
+proot-distro login $DUO_DISTRO -- systemctl enable tigervnc@:1.service
+proot-distro login $DUO_DISTRO -- systemctl start tigervnc@:1.service
 
 echo "Everything should be ready."
