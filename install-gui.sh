@@ -56,9 +56,11 @@ proot-distro login $DUO_DISTRO -- pacman -S --noconfirm tigervnc
 
 proot-distro login $DUO_DISTRO -- vncpasswd
 
-proot-distro login $DUO_DISTRO -- mkdir -p '~/.vnc/'
-proot-distro login $DUO_DISTRO -- echo "session=gnome-shell-mobile" '>' '~/.vnc/config'
-proot-distro login $DUO_DISTRO -- echo "geometry=1920x1080" '>>' '~/.vnc/config'
+DISPLAY_SIZE="1920x1080"
+
+proot-distro login $DUO_DISTRO --user $DUO_USER -- mkdir -p /home/$DUO_USER/.vnc/
+proot-distro login $DUO_DISTRO --user $DUO_USER -- awk -v user="$DUO_USER" 'BEGIN { print "session=gnome-shell-mobile" > "/home/" user "/.vnc/config" }'
+proot-distro login $DUO_DISTRO --user $DUO_USER -- awk -v geometry="$DISPLAY_SIZE" -v user="$DUO_USER" 'BEGIN { print "geometry=" geometry >> "/home/" user "/.vnc/config" }'
 
 # Create a new systemd service file for TigerVNC
 SERVICE_FILE="/etc/systemd/system/tigervnc@:1.service"
