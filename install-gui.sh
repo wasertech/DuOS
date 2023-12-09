@@ -1,5 +1,7 @@
 #!/bin/bash
 
+set -xe
+
 # echo "Not implemented yet."
 # exit 1
 
