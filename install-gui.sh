@@ -17,10 +17,12 @@ pkg install wget -y
 
 # Install and run the installer
 wget -O install.sh https://raw.githubusercontent.com/wasertech/deux-surfaces/master/install.sh && \
-. install.sh && \
-. ~/.bashrc && \
-init && \
-. ~/.bashrc || echo "Installation failed!" && exit 1
+. install.sh
+
+
+# . ~/.bashrc && \
+# init && \
+# . ~/.bashrc || echo "Installation failed!" && exit 1
 
 
 if [ -z "$DUO_DISTRO" ]; then
