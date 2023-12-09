@@ -58,6 +58,18 @@ wget -O install-gui.sh https://raw.githubusercontent.com/wasertech/deux-surfaces
 bash install-gui.sh
 ```
 
+Or clone the repository and run the GUI installer:
+
+```bash
+# If you haven't installed git yet
+pkg install git make
+
+# Clone the repository and run the installer
+git clone https://github.com/wasertech/deux-surfaces.git && \
+cd deux-surfaces && \
+make install-gui || echo "Installation failed!"
+```
+
 ### Usage
 
 Once installed, type `duo` to start :

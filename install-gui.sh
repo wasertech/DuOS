@@ -17,7 +17,7 @@ pkg install wget -y
 
 # Install and run the installer
 wget -O install.sh https://raw.githubusercontent.com/wasertech/deux-surfaces/master/install.sh && \
-bash install.sh || echo "Installation failed!" && exit 1
+. install.sh || echo "Installation failed!" && exit 1
 
 source ~/.bashrc
 
