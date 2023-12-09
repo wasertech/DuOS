@@ -55,14 +55,13 @@ pamac-gnome-integration
 proot-distro login $DUO_DISTRO -- pacman -S --noconfirm tigervnc
 
 proot-distro login $DUO_DISTRO -- vncpasswd
-proot-distro login $DUO_DISTRO -- '
-  # Configure VNC to use GNOME Mobile Shell
-  echo "session=gnome-shell-mobile" > ~/.vnc/config
-  echo "geometry=1920x1080" >> ~/.vnc/config
 
-  # Create a new systemd service file for TigerVNC
-  SERVICE_FILE="/etc/systemd/system/tigervnc@:1.service"
-  bash -c "cat > $SERVICE_FILE" <<EOF
+proot-distro login $DUO_DISTRO -- 'echo "session=gnome-shell-mobile" > ~/.vnc/config'
+proot-distro login $DUO_DISTRO -- 'echo "geometry=1920x1080" >> ~/.vnc/config'
+
+# Create a new systemd service file for TigerVNC
+SERVICE_FILE="/etc/systemd/system/tigervnc@:1.service"
+proot-distro login $DUO_DISTRO -- 'cat > $SERVICE_FILE" <<EOF
 [Unit]
 Description=Remote desktop service (VNC)
 After=syslog.target network.target
