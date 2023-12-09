@@ -52,6 +52,8 @@ pamac-cli \
 pamac-flatpak-plugin \
 pamac-gnome-integration
 
+proot-distro login $DUO_DISTRO -- pacman -S --noconfirm tigervnc
+
 proot-distro login $DUO_DISTRO -- vncpasswd
 proot-distro login $DUO_DISTRO -- '
   # Configure VNC to use GNOME Mobile Shell
