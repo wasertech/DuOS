@@ -57,10 +57,10 @@ proot-distro login $DUO_DISTRO -- pacman -S --noconfirm tigervnc
 
 # Set LANGUAGE, LC_ALL and LANG
 read -p "Enter your language (e.g. en_US): " _LANG 'en_US'
+proot-distro login $DUO_DISTRO --user $DUO_USER -- touch /etc/locale.conf
 proot-distro login $DUO_DISTRO --user $DUO_USER -- sed -i "s/#LANG=/LANG=$_LANG.UTF-8/g" /etc/locale.conf
 proot-distro login $DUO_DISTRO --user $DUO_USER -- sed -i "s/#LANGUAGE=/LANGUAGE=$_LANG.UTF-8/g" /etc/locale.conf
 proot-distro login $DUO_DISTRO --user $DUO_USER -- sed -i "s/#LC_ALL=/LC_ALL=$_LANG.UTF-8/g" /etc/locale.conf
-
 proot-distro login $DUO_DISTRO --user $DUO_USER -- vncpasswd
 
 DISPLAY_SIZE="1920x1080"
