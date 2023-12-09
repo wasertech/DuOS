@@ -132,7 +132,7 @@ function init() {
     echo "Setting up the shell..."
     if [ -z "$DUO_USER" ]; then
         echo "No user is set."
-        init
+        exit 1
     fi
 
     login $DUO_DISTRO --user $DUO_USER -- awk -v user="$DUO_USER" 'BEGIN { print "export DUO_USER=" user >> "/home/" user "/.zshrc" }'

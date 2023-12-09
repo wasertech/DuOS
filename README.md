@@ -51,7 +51,10 @@ make install || echo "Installation failed!"
 5. (Optional) If you want to install a graphical environment, run the following commands:
 
 ```bash
-wget https://raw.githubusercontent.com/Deux-Surfaces/Deux-Surfaces/main/install-gui.sh
+# If you haven't installed wget yet
+pkg install wget
+
+wget -O install-gui.sh https://raw.githubusercontent.com/wasertech/deux-surfaces/master/install-gui.sh
 bash install-gui.sh
 ```
 
