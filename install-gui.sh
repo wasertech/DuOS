@@ -44,6 +44,9 @@ fi
 # Install GDM
 proot-distro login $DUO_DISTRO -- pacman -S gdm --noconfirm
 
+# Remove gnome-shell
+proot-distro login $DUO_DISTRO -- pacman -R gnome-shell --noconfirm
+
 # Install Gnome Shell Mobile
 proot-distro login $DUO_DISTRO -- pacman -S gnome-shell-mobile --noconfirm
 
