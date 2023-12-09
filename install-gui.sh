@@ -19,11 +19,11 @@ pkg install wget -y
 wget -O install.sh https://raw.githubusercontent.com/wasertech/deux-surfaces/master/install.sh && \
 . install.sh || echo "Installation failed!" && exit 1
 
-source ~/.bashrc
+. ~/.bashrc
 
 init
 
-source ~/.bashrc
+. ~/.bashrc
 
 if [ -z "$DUO_DISTRO" ]; then
     echo "No distribution is set."
