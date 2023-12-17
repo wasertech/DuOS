@@ -118,9 +118,21 @@ then
 else
 	&>/dev/null
 fi
-if [ -f $PREFIX/bin/start-duo ]
+if [ -f $PREFIX/bin/start-wine ]
 then
-        rm $PREFIX/bin/start-box64 &>/dev/null
+        rm $PREFIX/bin/start-wine &>/dev/null
+else
+        &>/dev/null
+fi
+if [ -f $PREFIX/bin/start-xfce ]
+then
+        rm $PREFIX/bin/start-xfce &>/dev/null
+else
+        &>/dev/null
+fi
+if [ -f $PREFIX/bin/start-shell ]
+then
+        rm $PREFIX/bin/start-shell &>/dev/null
 else
         &>/dev/null
 fi
