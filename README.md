@@ -38,7 +38,3 @@ Once installed, type `duo` to start :
 ```bash
 duo
 ```
-
-### Useful considerations
-
-DuOS will only install a minimal GNU/Linux system. No dotfiles (appart from DuOS ones) will be installed. You can install your own dotfiles or use the default ones.
