@@ -9,9 +9,12 @@ box64 --version || echo "Couldn't fetch Box64 version."
 echo "----------------------- Wine -----------------------"
 box64 wine --version || echo "Couldn't fetch Wine version."
 echo "----------------------- Login ----------------------"
-echo "You are now logged in as $(whoami)."
+echo "You are now authenticated with user ID ${UID}."
+whoami
+fastfetch
 echo "Type 'exit' or [Ctrl] + [D] to exit from DuOS Shell."
 bash --login -i
 echo "----------------------- Exit -----------------------"
 echo "DuOS Shell exited. Goodbye!"
-sleep 1
+echo "Stopping Termux-X11...";pkill -f pulseaudio;pkill -f "app_process / com.termux.x11";echo ""
+exit

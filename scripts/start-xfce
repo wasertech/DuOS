@@ -17,7 +17,7 @@ then
 	. start-xfce
 elif [ $res = 1 ]
 then                                                                                                                                                                                     
-        echo -e "\033[0;33mTermux-X11 and Wine will start now. If you want exit from Box64Droid, type \033[0;36m'q'\033[0;33m in the terminal."
+        echo -e "\033[0;33mTermux-X11 and XFCE will start now. If you want exit from DuOS, type \033[0;36m'q'\033[0;33m in the terminal then press Enter."
         sleep 1
         export DISPLAY=:0
         export X11_WIDTH=800
@@ -25,7 +25,7 @@ then
         startxfce4 &>/dev/null &
 elif [ $res = 2 ]
 then
-        echo -e "\033[0;33mTermux-X11 and Wine will start now. If you want exit from Box64Droid, type \033[0;36m'q'\033[0;33m in the terminal and press Enter."
+        echo -e "\033[0;33mTermux-X11 and XFCE will start now. If you want exit from DuOS, type \033[0;36m'q'\033[0;33m in the terminal then press Enter."
         sleep 1
         export DISPLAY=:0
         export X11_WIDTH=1024
@@ -33,7 +33,7 @@ then
         startxfce4 &>/dev/null &
 elif [ $res = 3 ]
 then
-        echo -e "\033[0;33mTermux-X11 and Wine will start now. If you want exit from Box64Droid, type \033[0;36m'q'\033[0;33m in the terminal and press Enter."
+        echo -e "\033[0;33mTermux-X11 and XFCE will start now. If you want exit from DuOS, type \033[0;36m'q'\033[0;33m in the terminal then press Enter."
         sleep 1
         export DISPLAY=:0
         export X11_WIDTH=1280
@@ -41,7 +41,7 @@ then
         startxfce4 &>/dev/null &
 elif [ $res = 4 ]
 then
-        echo -e "\033[0;33mTermux-X11 and Wine will start now. If you want exit from Box64Droid, type \033[0;36m'q'\033[0;33m in the terminal and press Enter."
+        echo -e "\033[0;33mTermux-X11 and XFCE will start now. If you want exit from DuOS, type \033[0;36m'q'\033[0;33m in the terminal then press Enter."
         sleep 1
         export DISPLAY=:0
         export X11_WIDTH=1920
@@ -50,7 +50,7 @@ then
 elif [ $res = 5 ]
 then
         # export res="$(xrandr | grep current | awk '{print $8$9$10}' | tr -d ,)"
-        echo -e "\033[0;33mTermux-X11 and Wine will start now. If you want exit from Box64Droid, type \033[0;36m'q'\033[0;33m in the terminal then press Enter."
+        echo -e "\033[0;33mTermux-X11 and XFCE will start now. If you want exit from DuOS, type \033[0;36m'q'\033[0;33m in the terminal then press Enter."
         sleep 1
         export DISPLAY=:0
         # export X11_WIDTH=$(echo $res | cut -d "x" -f 1)

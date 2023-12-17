@@ -32,7 +32,7 @@ pkg install x11-repo -y &>/dev/null
 echo " x11-repo installed"
 echo ""
 echo " Installing required packages..."
-pkg install pulseaudio wget xkeyboard-config freetype fontconfig libpng termux-x11-nightly -y &>/dev/null
+pkg install pulseaudio wget xkeyboard-config freetype fontconfig libpng termux-x11-nightly fastfetch -y &>/dev/null
 pkg install xorg-xrandr -y &>/dev/null
 echo ""
 if [ $version = 1 ] || [ $version = 3 ]
