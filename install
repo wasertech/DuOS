@@ -1,0 +1,185 @@
+#!/bin/bash
+clear
+echo "Select the needed DuOS version to install:"
+echo "1) Native version (Adreno 610-740, i.e. Surface Duo)."
+echo "2) Cancel the DuOS installation."
+echo ""
+read version
+if [ $version = 1 ]
+then
+        clear
+	echo "WARNING! This version of DuOS not finished and not stable."
+	sleep 3
+elif [ $version = 2 ]
+then
+	rm install
+	exit
+else
+	clear
+	echo "Invalid version! Rerun installation the script."
+	rm install
+	exit
+fi
+clear
+echo " Starting DuOS installation..." & sleep 3
+echo " DuOS creates a folder called "DuOS" on the internal storage to store configuration files. For Termux, to create this folder, it is necessary to have storage permissions, click on allow to proceed." & sleep 5 &>/dev/null	
+termux-setup-storage & sleep 3 &>/dev/null
+pkg update -y
+echo ""
+echo " Installing x11-repo..."
+echo ""
+pkg install x11-repo -y &>/dev/null
+echo " x11-repo installed"
+echo ""
+echo " Installing required packages..."
+pkg install pulseaudio wget xkeyboard-config freetype fontconfig libpng termux-x11-nightly -y &>/dev/null
+pkg install xorg-xrandr -y &>/dev/null
+echo ""
+if [ $version = 1 ] || [ $version = 3 ]
+then
+        if [ -d $PREFIX/var/lib/proot-distro/installed-rootfs/ubuntu/root/.wine ]
+        then
+                echo " Previous DuOS detected. You want backup then restore Wine after update? (yes/no/y/n, another = skip)"
+                read choice
+		if [ -z $choice ]
+		then
+			&>/dev/null
+		elif [ $choice = yes ] || [ $choice = y ]
+                then
+                        mv $PREFIX/var/lib/proot-distro/installed-rootfs/ubuntu/root/.wine ~/
+			mv $PREFIX/var/lib/proot-distro/installed-rootfs/ubuntu/opt/wine ~/
+                        echo " Backup finished"
+                        echo ""
+                elif [ $choice = no ] || [ $choice = n ]
+                then
+                        &>/dev/null
+		fi
+        else
+                &>/dev/null
+        fi
+elif [ $version = 2 ]
+then
+        if sudo [ -d /data/data/com.termux/files/home/ubuntu/root/.wine ]
+        then
+                echo " Previous DuOS detected. You want backup then restore Wine after update? (yes/no/y/n, another = skip)"
+                read choice
+		if [ -z $choice ]
+		then
+			&>/dev/null
+                elif [ $choice = yes ] || [ $choice = y ]
+                then
+                        sudo mv /data/data/com.termux/files/home/ubuntu/root/.wine ~/
+			sudo mv /data/data/com.termux/files/home/ubuntu/opt/wine ~/
+                        echo " Backup finished"
+                        echo ""
+                elif [ $choice = no ] || [ $choice = n ]
+                then
+                        &>/dev/null
+		fi
+		if [ -c ~/ubuntu/dev/urandom ]
+	        then
+					sudo umount ~/ubuntu/proc &>/dev/null
+        	        sudo umount ~/ubuntu/sys &>/dev/null
+                	sudo umount ~/ubuntu/dev/pts &>/dev/null
+	                sudo umount ~/ubuntu/dev &>/dev/null
+	                sudo umount ~/ubuntu/sdcard &>/dev/null
+        	else
+                	&>/dev/null
+	        fi
+        else
+                &>/dev/null
+        fi
+else
+        if [ -d $HOME/.wine ]
+        then
+                echo " Previous DuOS detected. You want backup then restore Wine after update? (yes/no/y/n, another = skip)"
+                read choice
+		if [ -z $choice ]
+		then
+			&>/dev/null
+		elif [ $choice = yes ] || [ $choice = y ]
+                then
+                        mv $HOME/.wine $PREFIX/
+                        echo " Backup finished"
+                        echo ""
+                elif [ $choice = no ] || [ $choice = n ]
+                then
+                        &>/dev/null
+		fi
+        else
+                &>/dev/null
+        fi
+fi
+echo " Checking for older DuOS versions and removing them if any..."
+echo ""
+if [ -f $PREFIX/bin/duo ]
+then
+	rm $PREFIX/bin/duo &>/dev/null
+else
+	&>/dev/null
+fi
+if [ -f $PREFIX/bin/start-duo ]
+then
+        rm $PREFIX/bin/start-box64 &>/dev/null
+else
+        &>/dev/null
+fi
+if [ -d /sdcard/DuOS ]
+then
+	rm -r /sdcard/DuOS &>/dev/null
+else
+	&>/dev/null
+fi
+rm -r ~/.wine &>/dev/null
+rm -r $PREFIX/glibc &>/dev/null
+echo " Downloading Glibc prefix..."
+echo ""
+wget -q --show-progress https://github.com/wasertech/DuOS/releases/download/alpha/glibc-prefix.tar.xz
+echo ""
+echo " Unpacking Glibc-prefix, please wait..."
+tar -xJf glibc-prefix.tar.xz -C $PREFIX/
+echo ""
+echo " Rootfs installed"
+echo ""
+echo " Downloading DuOS starting scripts..."
+wget https://raw.githubusercontent.com/wasertech/DuOS/main/scripts/duo &>/dev/null
+wget https://raw.githubusercontent.com/wasertech/DuOS/main/scripts/start-wine &>/dev/null
+wget https://raw.githubusercontent.com/wasertech/DuOS/main/scripts/start-xfce &>/dev/null
+wget https://raw.githubusercontent.com/wasertech/DuOS/main/scripts/start-shell &>/dev/null
+chmod +x duo start-xfce start-wine start-shell
+mv duo start-xfce start-wine start-shell $PREFIX/bin/
+echo ""
+echo " Scripts installed"
+echo ""
+echo " Checking for Android 14 and apply fix for Termux-X11 if so"
+ANDROID_VERSION=$(termux-info | grep "13")
+if [ $ANDROID_VERSION = 14 ]
+then
+	find $PREFIX -type f -iname "*.apk" -exec chmod 400 "{}" \;
+else
+	&>/dev/null
+fi
+echo ""
+echo " Removing the installation waste..."
+rm glibc-prefix.tar.xz install
+if [ -d ~/.wine ]
+then
+	echo " Backup restored"
+else
+	&>/dev/null
+fi
+if [ -d $PREFIX/.wine ]
+then
+        echo " Restoring backup..."
+		echo ""
+        rm -r ~/.wine
+        mv $PREFIX/.wine ~/
+else
+        &>/dev/null
+fi
+clear
+echo ""
+echo " Install finished. To start DuOS run 'duo --start', to see more arguments run 'duo --help'"
+echo ""
+echo " And if everything goes as planned, Wine and 7-Zip file manager will start."
+echo ""

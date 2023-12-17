@@ -1,0 +1,76 @@
+#!/bin/bash
+echo "Not implemented."
+exit 1
+
+clear
+echo "Select need resoultion:"
+echo "1) 800x600 (4:3)"
+echo "2) 1024x768 (4:3)"
+echo "3) 1280x720 (16:9)"
+echo "4) 1920x1080 (16:9)"
+echo "5) Termux-X11 resolution"
+echo "6) Back to previous menu"
+echo ""
+read res
+clear
+if [ -z $res ]
+then
+	echo "Selectecting a resolution is mandatory."
+	sleep 1
+	. start-xfce
+elif [ $res = 1 ]
+then                                                                                                                                                                                     
+        echo -e "\033[0;33mTermux-X11 and Wine will start now. If you want exit from Box64Droid, type \033[0;36m'q'\033[0;33m in the terminal."
+        sleep 1
+        export DISPLAY=:0
+        export X11_WIDTH=800
+        export X11_HEIGHT=600
+        startxfce4 &>/dev/null &
+elif [ $res = 2 ]
+then
+        echo -e "\033[0;33mTermux-X11 and Wine will start now. If you want exit from Box64Droid, type \033[0;36m'q'\033[0;33m in the terminal and press Enter."
+        sleep 1
+        export DISPLAY=:0
+        export X11_WIDTH=1024
+        export X11_HEIGHT=768
+        startxfce4 &>/dev/null &
+elif [ $res = 3 ]
+then
+        echo -e "\033[0;33mTermux-X11 and Wine will start now. If you want exit from Box64Droid, type \033[0;36m'q'\033[0;33m in the terminal and press Enter."
+        sleep 1
+        export DISPLAY=:0
+        export X11_WIDTH=1280
+        export X11_HEIGHT=720
+        startxfce4 &>/dev/null &
+elif [ $res = 4 ]
+then
+        echo -e "\033[0;33mTermux-X11 and Wine will start now. If you want exit from Box64Droid, type \033[0;36m'q'\033[0;33m in the terminal and press Enter."
+        sleep 1
+        export DISPLAY=:0
+        export X11_WIDTH=1920
+        export X11_HEIGHT=1080
+        startxfce4 &>/dev/null &
+elif [ $res = 5 ]
+then
+        # export res="$(xrandr | grep current | awk '{print $8$9$10}' | tr -d ,)"
+        echo -e "\033[0;33mTermux-X11 and Wine will start now. If you want exit from Box64Droid, type \033[0;36m'q'\033[0;33m in the terminal then press Enter."
+        sleep 1
+        export DISPLAY=:0
+        # export X11_WIDTH=$(echo $res | cut -d "x" -f 1)
+        # export X11_HEIGHT=$(echo $res | cut -d "x" -f 2)
+        startxfce4 &>/dev/null &
+elif [ $res = 6 ]
+then
+        . $PREFIX/bin/duo
+else
+        echo "You failed to select an appropriate resolution."
+        sleep 0.5
+        clear
+        . $PREFIX/bin/start-xfce
+fi
+echo ""
+am start -n com.termux.x11/com.termux.x11.MainActivity &>/dev/null
+read -p "" yn
+case $yn in
+       	[qQ]* ) echo " Stopping XFCE...";pkill -f startxfce4;echo "";echo " Stopping Termux-X11...";pkill -f pulseaudio;pkill -f "app_process / com.termux.x11";echo ""
+esac

@@ -1,0 +1,10 @@
+#!/bin/bash
+clear
+echo "DuOS Shell"
+uname -a
+bash --version || echo "Could fetch Bash version."
+xfce4 --version || echo "Could fetch XFCE version."
+wine --version || echo "Could fetch Wine version."
+box64 --version || echo "Could fetch Box64 version."
+echo ""
+bash --login -i

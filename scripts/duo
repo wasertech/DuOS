@@ -1,0 +1,217 @@
+#!/bin/bash
+if [ $# -eq 0 ]
+then
+	echo "Empty argument, use --help to see available arguments"
+elif [ $1 = "--start" ]
+then
+	clear
+	export folder="/sdcard/DuOS"
+	echo "Checking configuration..."
+	if [ -d $folder ]
+	then
+		&>/dev/null
+	else
+		mkdir $folder
+	fi
+	if [ -f $folder/DXVK_D8VK_HUD.conf ]
+	then
+	        &>/dev/null
+	else
+	        cp $PREFIX/glibc/opt/DXVK_D8VK_HUD.conf $folder/
+	fi
+	if [ -f $folder/DXVK_D8VK.conf ]
+	then
+    		&>/dev/null
+	else
+    		cp $PREFIX/glibc/opt/DXVK_D8VK.conf $folder/
+	fi
+	if [ -f $folder/DuOS.conf ]
+	then
+    		&>/dev/null
+	else
+	        cp $PREFIX/glibc/opt/DuOS.conf $folder/
+	fi
+	echo "Configuration check completed"
+	echo "Starting Termux-x11..."
+	termux-x11 :0 &>/dev/null &
+	echo "Starting PulseAudio..."
+	pulseaudio --start --load="module-native-protocol-tcp auth-ip-acl=127.0.0.1 auth-anonymous=1" --exit-idle-time=-1 &>/dev/null
+	echo ""
+	echo -e "Termux-x11 started"
+	. $folder/DuOS.conf
+	. $folder/DXVK_D8VK_HUD.conf
+	if [ ! -d $HOME/.wine ]
+	then
+		echo ""
+	        echo "Wine prefix not found! It will be created..."
+		echo "Creating Wine prefix, going to Termux-X11..."
+		am start -n com.termux.x11/com.termux.x11.MainActivity &>/dev/null
+		. /sdcard/DuOS/DuOS.conf
+		box64 wine64 wineboot &>/dev/null
+		cp -r $PREFIX/glibc/opt/Shortcuts/* "$HOME/.wine/drive_c/ProgramData/Microsoft/Windows/Start Menu"
+		ln -s /sdcard $HOME/.wine/dosdevices/d:
+		echo "Installing DXVK, D8VK and vkd3d-proton..."
+		box64 wine "$PREFIX/glibc/opt/Resources64/Run if you will install on top of WineD3D.bat" &>/dev/null
+		box64 wine "$PREFIX/glibc/opt/Resources64/DXVK2.3/DXVK2.3.bat" &>/dev/null
+		box64 wine reg add "HKEY_CURRENT_USER\Software\Wine\DllOverrides" /v d3d12 /d native /f &>/dev/null
+		box64 wine reg add "HKEY_CURRENT_USER\Software\Wine\DllOverrides" /v d3d12core /d native /f &>/dev/null
+		cp $PREFIX/glibc/opt/Resources/vkd3d-proton2.11/* $HOME/.wine/drive_c/windows/syswow64
+		cp $PREFIX/glibc/opt/Resources64/vkd3d-proton2.11/* $HOME/.wine/drive_c/windows/system32
+		echo "Done!"
+	else
+		&>/dev/null
+	fi
+	clear
+	echo "DuOS"
+	echo "Select an option to start:"
+	echo "1) Start XFCE 4"
+    echo "2) Start Wine"
+	echo "3) DuOS Shell"
+	echo "4) Change Wine version"
+	echo "5) Recreate Wine prefix"  
+	echo "6) Exit"
+	echo ""
+	read choice
+	if [ -z $choice ]
+	then
+		echo "Selecting an option is mandatory."
+		sleep 1
+		. duo
+    elif [ $choice = 1 ]
+    then
+        . start-xfce
+	elif [ $choice = 2 ]
+	then
+		. start-wine
+	elif [ $choice = 3 ]
+	then
+        . start-shell
+    elif [ $choice = 4 ]
+	then
+		clear
+		echo "Select Wine version to install:"
+		echo "1) Wine GE 8-13"
+		echo "2) Wine Stable 8.0"
+		echo "3) Wine Staging-TKG 8.13"
+		echo "4) Back to previous menu"
+		echo ""
+		read choice
+		if [ -z $choice ]
+		then
+			echo "Selecting an option is mandatory. Choosing option 4 by default..."
+			sleep 1
+			. duo
+		elif [ $choice = 4 ]
+		then
+			. duo
+		elif [ $choice = 1 ] || [ $choice = 2 ] || [ $choice = 3 ]
+		then
+			clear
+			echo "Removing previous Wine..."
+			rm -r $PREFIX/glibc/opt/wine
+			echo "Removing previous Wine prefix..."
+			rm -r $HOME/.wine
+			if [ $choice = 1 ]
+			then
+				echo "Downloading Wine GE 8-13..."
+				echo ""
+				wget -q --show-progress https://github.com/Pipetto-crypto/androBox/releases/download/wine-ge-8.13/wine-lutris-GE-Proton8-13-x86_64.tar.xz
+				echo ""
+				echo "Unpacking Wine GE 8-13..."
+				tar -xf wine-lutris-GE-Proton8-13-x86_64.tar.xz -C $PREFIX/glibc/opt
+				mv $PREFIX/glibc/opt/lutris-GE-Proton8-13-x86_64 $PREFIX/glibc/opt/wine
+			elif [ $choice = 2 ]
+			then
+				echo "Downloading Wine Stable 8.0..."
+				echo ""
+				wget -q --show-progress https://github.com/Pipetto-crypto/androBox/releases/download/wine-8.0/wine-8.0-amd64.tar.xz
+				echo ""
+				echo "Unpacking Wine Stable 8.0..."
+				tar -xf wine-8.0-amd64.tar.xz -C $PREFIX/glibc/opt
+				mv $PREFIX/glibc/opt/wine-8.0-amd64 $PREFIX/glibc/opt/wine
+			elif [ $choice = 3 ]
+			then
+				echo "Downloading Wine Staging-TKG 8.13..."
+				echo ""
+				wget -q --show-progress https://github.com/Ilya114/DuOS/releases/download/alpha/wine-8.13-staging-tkg-amd64.tar.xz
+				echo ""
+				echo "Unpacking Wine Staging-TKG 8.13..."
+				tar -xf wine-8.13-staging-tkg-amd64.tar.xz -C $PREFIX/glibc/opt
+				mv $PREFIX/glibc/opt/wine-8.13-staging-tkg-amd64 $PREFIX/glibc/opt/wine
+			fi
+		echo "Creating Wine prefix, going to Termux-X11..."
+		am start -n com.termux.x11/com.termux.x11.MainActivity &>/dev/null
+		. /sdcard/DuOS/DuOS.conf
+		box64 wine64 wineboot &>/dev/null
+		cp -r $PREFIX/glibc/opt/Shortcuts/* "$HOME/.wine/drive_c/ProgramData/Microsoft/Windows/Start Menu"
+		ln -s /sdcard $HOME/.wine/dosdevices/d:
+		echo "Installing DXVK, D8VK and vkd3d-proton..."
+		box64 wine "$PREFIX/glibc/opt/Resources64/Run if you will install on top of WineD3D.bat" &>/dev/null
+		box64 wine "$PREFIX/glibc/opt/Resources64/DXVK2.3/DXVK2.3.bat" &>/dev/null
+		box64 wine reg add "HKEY_CURRENT_USER\Software\Wine\DllOverrides" /v d3d12 /d native /f &>/dev/null
+		box64 wine reg add "HKEY_CURRENT_USER\Software\Wine\DllOverrides" /v d3d12core /d native /f &>/dev/null
+		cp $PREFIX/glibc/opt/Resources/vkd3d-proton2.11/* $HOME/.wine/drive_c/windows/syswow64
+		cp $PREFIX/glibc/opt/Resources64/vkd3d-proton2.11/* $HOME/.wine/drive_c/windows/system32
+		echo "Removing archives..."
+		rm wine-*.tar.xz
+		echo "Done!"
+		. duo
+		else
+			echo "You failed to select an appropriate option. Choosing option 4 by default..."
+			sleep 1
+			. duo
+		fi
+	elif [ $choice = 5 ]
+	then
+		clear
+		echo "Removing previous Wine prefix..."
+		rm -r $HOME/.wine
+		echo "Creating Wine prefix, going to Termux-X11..."
+		am start -n com.termux.x11/com.termux.x11.MainActivity &>/dev/null
+		. /sdcard/DuOS/DuOS.conf
+		box64 wine64 wineboot &>/dev/null
+		cp -r $PREFIX/glibc/opt/Shortcuts/* "$HOME/.wine/drive_c/ProgramData/Microsoft/Windows/Start Menu"
+		ln -s /sdcard $HOME/.wine/dosdevices/d:
+		echo "Installing DXVK, D8VK and vkd3d-proton..."
+		box64 wine "$PREFIX/glibc/opt/Resources64/Run if you will install on top of WineD3D.bat" &>/dev/null
+		box64 wine "$PREFIX/glibc/opt/Resources64/DXVK2.3/DXVK2.3.bat" &>/dev/null
+		box64 wine reg add "HKEY_CURRENT_USER\Software\Wine\DllOverrides" /v d3d12 /d native /f &>/dev/null
+		box64 wine reg add "HKEY_CURRENT_USER\Software\Wine\DllOverrides" /v d3d12core /d native /f &>/dev/null
+		cp $PREFIX/glibc/opt/Resources/vkd3d-proton2.11/* $HOME/.wine/drive_c/windows/syswow64
+		cp $PREFIX/glibc/opt/Resources64/vkd3d-proton2.11/* $HOME/.wine/drive_c/windows/system32
+		echo "Done!"
+		. duo
+	elif [ $choice = 6 ]
+	then
+		pkill -f "app_process / com.termux.x11"
+		pkill -f pulseaudio
+		exit
+	else
+		echo "You failed to select an appropriate option."
+		sleep 1
+		. duo
+	fi
+elif [ $1 = "--uninstall" ]
+then
+	echo "Uninstalling DuOS..."
+	rm $PREFIX/bin/duo
+	rm $PREFIX/bin/start-duo
+	rm $PREFIX/bin/start-xfce
+	rm -r $PREFIX/glibc
+	rm -r $HOME/.wine
+	echo "Done!"
+elif [ $1 = "--version" ]
+then
+    echo "17.12.23 (alpha)"
+elif [ $1 = "--help" ]
+then
+ 	echo "DuOS (native version) - configured tools to launch Box64, Box86, Wine 8.14, DXVK with Adreno GPU drivers in Termux"
+	echo "Usage: duo {argument}"
+	echo "Available arguments:"
+	echo "--start - start DuOS"
+	echo "--uninstall - uninstall DuOS (all data in rootfs will be clear)"
+	echo "--version - show current version of DuOS"
+	echo "--help - see available arguments"
+else
+	echo "Invalid argument, use --help to see available arguments"
+fi
