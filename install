@@ -142,10 +142,10 @@ echo ""
 echo " Rootfs installed"
 echo ""
 echo " Downloading DuOS starting scripts..."
-wget https://raw.githubusercontent.com/wasertech/DuOS/master/scripts/duo &>/dev/null
-wget https://raw.githubusercontent.com/wasertech/DuOS/master/scripts/start-wine &>/dev/null
-wget https://raw.githubusercontent.com/wasertech/DuOS/master/scripts/start-xfce &>/dev/null
-wget https://raw.githubusercontent.com/wasertech/DuOS/master/scripts/start-shell &>/dev/null
+wget https://raw.githubusercontent.com/wasertech/DuOS/alpha/scripts/duo &>/dev/null
+wget https://raw.githubusercontent.com/wasertech/DuOS/alpha/scripts/start-wine &>/dev/null
+wget https://raw.githubusercontent.com/wasertech/DuOS/alpha/scripts/start-xfce &>/dev/null
+wget https://raw.githubusercontent.com/wasertech/DuOS/alpha/scripts/start-shell &>/dev/null
 chmod +x duo start-xfce start-wine start-shell
 mv duo start-xfce start-wine start-shell $PREFIX/bin/
 echo ""
