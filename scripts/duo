@@ -180,6 +180,7 @@ then
 		cp $PREFIX/glibc/opt/Resources/vkd3d-proton2.11/* $HOME/.wine/drive_c/windows/syswow64
 		cp $PREFIX/glibc/opt/Resources64/vkd3d-proton2.11/* $HOME/.wine/drive_c/windows/system32
 		echo "Done!"
+        read -p "Type any key to continue..." -n1 -s
 		. duo
 	elif [ $choice = 6 ]
 	then
