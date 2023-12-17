@@ -26,7 +26,7 @@ Maybe, I don't know. I only have a Surface Duo, so I can't test it on other devi
 2. Open Termux and run the following commands:
 
 ```bash
-curl -o install https://raw.githubusercontent.com/wasertech/DuOS/master/scripts/install && chmod +x install && ./install || echo "Installation failed!"
+curl -o install https://raw.githubusercontent.com/wasertech/DuOS/alpha/install && chmod +x install && ./install || echo "Installation failed!"
 ```
 
 After the installation is completed, run `duo --start`. The starting script will start Termux-X11 and show the start menu.
