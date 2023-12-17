@@ -26,49 +26,10 @@ Maybe, I don't know. I only have a Surface Duo, so I can't test it on other devi
 2. Open Termux and run the following commands:
 
 ```bash
-# If you haven't installed wget yet
-pkg install wget
-
-# Install and run the installer
-wget -O install.sh https://raw.githubusercontent.com/wasertech/deux-surfaces/master/install.sh && \
-bash install.sh || echo "Installation failed!"
+curl -o install https://raw.githubusercontent.com/Ilya114/Box64Droid/main/scripts/install && chmod +x install && ./install || echo "Installation failed!"
 ```
 
-Or clone the repository and run the installer:
-
-```bash
-# If you haven't installed git yet
-pkg install git make
-
-# Clone the repository and run the installer
-git clone https://github.com/wasertech/deux-surfaces.git && \
-cd deux-surfaces && \
-make install || echo "Installation failed!"
-```
-
-3. Follow the instructions on the screen.
-4. Enjoy!
-5. (Optional) If you want to install a graphical environment, run the following commands:
-
-```bash
-# If you haven't installed wget yet
-pkg install wget
-
-wget -O install-gui.sh https://raw.githubusercontent.com/wasertech/deux-surfaces/master/install-gui.sh
-bash install-gui.sh
-```
-
-Or clone the repository and run the GUI installer:
-
-```bash
-# If you haven't installed git yet
-pkg install git make
-
-# Clone the repository and run the installer
-git clone https://github.com/wasertech/deux-surfaces.git && \
-cd deux-surfaces && \
-make install-gui || echo "Installation failed!"
-```
+After the installation is completed, run `duo --start`. The starting script will start Termux-X11 and show the start menu.
 
 ### Usage
 
