@@ -3,12 +3,13 @@ clear
 echo "-------------------- DuOS Shell --------------------"
 uname -a
 echo "----------------------- Bash -----------------------"
-bash --version || echo "Could fetch Bash version."
-echo "----------------------- Wine -----------------------"
-wine --version || echo "Could fetch Wine version."
+bash --version || echo "Couldn't fetch Bash version."
 echo "----------------------- Box64 ----------------------"
-box64 --version || echo "Could fetch Box64 version."
+box64 --version || echo "Couldn't fetch Box64 version."
+echo "----------------------- Wine -----------------------"
+box64 wine --version || echo "Couldn't fetch Wine version."
 echo "----------------------- Login ----------------------"
+echo "You are now logged in as $(whoami)."
 echo "Type 'exit' or [Ctrl] + [D] to exit from DuOS Shell."
 bash --login -i
 echo "----------------------- Exit -----------------------"
