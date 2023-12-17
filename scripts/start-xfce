@@ -1,7 +1,4 @@
 #!/bin/bash
-echo "Not implemented."
-exit 1
-
 clear
 echo "Select need resoultion:"
 echo "1) 800x600 (4:3)"

@@ -1,10 +1,16 @@
 #!/bin/bash
 clear
-echo "DuOS Shell"
+echo "-------------------- DuOS Shell --------------------"
 uname -a
+echo "----------------------- Bash -----------------------"
 bash --version || echo "Could fetch Bash version."
-xfce4 --version || echo "Could fetch XFCE version."
+echo "----------------------- Wine -----------------------"
 wine --version || echo "Could fetch Wine version."
+echo "----------------------- Box64 ----------------------"
 box64 --version || echo "Could fetch Box64 version."
-echo ""
+echo "----------------------- Login ----------------------"
+echo "Type 'exit' or [Ctrl] + [D] to exit from DuOS Shell."
 bash --login -i
+echo "----------------------- Exit -----------------------"
+echo "DuOS Shell exited. Goodbye!"
+sleep 1
