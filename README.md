@@ -2,6 +2,8 @@
 
 My favorite GNU/Linux flavor on the Microsoft Surface Duo.
 
+![Screenshot_20231218-200749](https://github.com/wasertech/DuOS/assets/79070834/b2e60ea5-b283-4a41-bee4-8640fb9c638c)
+
 ## What is this?
 
 This is a collection of scripts and instructions to install GNU/Linux on the Microsoft Surface Duo.
