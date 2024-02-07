@@ -133,7 +133,7 @@ then
 			then
 				echo "Downloading Wine Staging-TKG 8.13..."
 				echo ""
-				wget -q --show-progress https://github.com/Ilya114/DuOS/releases/download/alpha/wine-8.13-staging-tkg-amd64.tar.xz
+				wget -q --show-progress https://github.com/wasertech/DuOS/releases/download/alpha/wine-8.13-staging-tkg-amd64.tar.xz
 				echo ""
 				echo "Unpacking Wine Staging-TKG 8.13..."
 				tar -xf wine-8.13-staging-tkg-amd64.tar.xz -C $PREFIX/glibc/opt
