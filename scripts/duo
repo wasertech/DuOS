@@ -65,7 +65,7 @@ then
 	echo "DuOS"
 	echo "Select an option to start:"
 	echo "1) Start XFCE 4"
-    echo "2) Start Wine"
+    	echo "2) Start Wine"
 	echo "3) DuOS Shell"
 	echo "4) Change Wine version"
 	echo "5) Recreate Wine prefix"  
